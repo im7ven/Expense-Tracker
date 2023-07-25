@@ -106,7 +106,11 @@ export const Auth = ({ isLogin }: Props) => {
             <Center mt={5}>
               <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
             </Center>
-            {isLogin && <Link to={"/signup"}>Need an account? Sign Up</Link>}
+            {isLogin ? (
+              <Link to={"/signup"}>Need an account? Sign Up</Link>
+            ) : (
+              <Link to={"/login"}>Already have an account? Login</Link>
+            )}
           </FormControl>
         </form>
       </Container>
