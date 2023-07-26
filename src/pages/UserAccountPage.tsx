@@ -1,13 +1,8 @@
-import {
-  User,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-} from "firebase/auth";
-import { useEffect, useState } from "react";
-import { auth } from "../config/firebase";
 import { Button } from "@chakra-ui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
 
 export const UserAccountPage = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -16,28 +11,12 @@ export const UserAccountPage = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
-
-      // if (currentUser?.displayName === null) {
-      //   updateName(currentUser);
-      // }
     });
     return () => {
       unsubscribe();
     };
   }, []);
-
-  // const updateName = async (currentUser: User) => {
-  //   setUser(currentUser);
-  //   try {
-  //     await updateProfile(currentUser, {
-  //       displayName: user?.displayName,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleLogout = async () => {
     try {

@@ -1,23 +1,22 @@
 import {
-  Container,
-  Box,
-  Input,
-  FormControl,
-  FormLabel,
   Badge,
+  Box,
   Button,
   Center,
+  Container,
+  FormControl,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
-import { auth } from "../config/firebase";
 import {
   UserCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
   updateProfile,
 } from "firebase/auth";
+import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
 
 interface Props {
   isLogin: boolean;
