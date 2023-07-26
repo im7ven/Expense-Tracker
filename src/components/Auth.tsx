@@ -14,9 +14,10 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
   isLogin: boolean;
@@ -27,12 +28,29 @@ export const Auth = ({ isLogin }: Props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const userCredential: UserCredential | null = isLogin
-        ? await signInWithEmailAndPassword(auth, email, password)
-        : await createUserWithEmailAndPassword(auth, email, password);
+      let userCredential: UserCredential | null = null;
+
+      if (isLogin) {
+        userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        navigate("/useraccount");
+      } else {
+        userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        navigate("/login");
+      }
 
       if (!isLogin && userCredential !== null) {
         await updateName(name);

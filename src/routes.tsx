@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { LoginPage } from "./pages/LoginPage";
 import { Layout } from "./pages/Layout";
 import { SignupPage } from "./pages/Signup";
+import { UserAccountPage } from "./pages/UserAccountPage";
+import { PrivateRoutes } from "./components/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,10 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignupPage /> },
       { path: "/login", element: <LoginPage /> },
     ],
+  },
+  {
+    element: <PrivateRoutes />,
+    children: [{ path: "/useraccount", element: <UserAccountPage /> }],
   },
 ]);
 
