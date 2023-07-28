@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import {
   ReactNode,
@@ -12,7 +13,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 interface User {
   uid?: string | null;
@@ -22,7 +24,11 @@ interface User {
 
 interface AuthContextValue {
   user?: User | null;
-  signUp: (email: string, password: string) => Promise<UserCredential>;
+  signUp: (
+    email: string,
+    password: string,
+    userName: string
+  ) => Promise<UserCredential>;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signOut: () => Promise<void>;
   authStateRestored: boolean;
@@ -38,8 +44,30 @@ export const UserAuthContextProvider = ({ children }: Props) => {
   const [authStateRestored, setAuthStateRestored] = useState(false);
 
   // Sign up function
-  const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signUp = async (
+    userEmail: string,
+    userPassword: string,
+    userName: string
+  ) => {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      userEmail,
+      userPassword
+    );
+    const { user } = userCredentials;
+
+    await updateProfile(user, {
+      displayName: userName,
+    });
+
+    const { uid, displayName, email } = user;
+
+    await setDoc(doc(db, "users", uid), {
+      displayName: displayName,
+      email: email || "",
+    });
+
+    return userCredentials;
   };
 
   // Login function

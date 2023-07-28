@@ -19,11 +19,7 @@ export const UserAccountPage = () => {
   };
   return (
     <div>
-      <p>
-        {user?.displayName === ""
-          ? "Welcome to the expense tracker app"
-          : "Welcome back, " + user?.displayName}
-      </p>
+      <p>{auth.currentUser?.displayName}</p>
       <Button onClick={handleLogout}>Logout</Button>
     </div>
   );

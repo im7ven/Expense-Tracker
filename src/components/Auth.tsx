@@ -37,8 +37,8 @@ export const Auth = ({ isLogin }: Props) => {
         navigate("/useraccount");
         console.log("this is test2", auth.currentUser);
       } else {
-        await signUp(email, password);
-        await updateName(name);
+        await signUp(email, password, name);
+        console.log(auth.currentUser);
         navigate("/useraccount");
       }
     } catch (err: unknown) {
