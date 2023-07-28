@@ -4,11 +4,16 @@ import { Layout } from "./pages/Layout";
 import { SignupPage } from "./pages/Signup";
 import { UserAccountPage } from "./pages/UserAccountPage";
 import { PrivateRoutes } from "./components/PrivateRoutes";
+import { UserAuthContextProvider } from "./context/UserAuthContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <UserAuthContextProvider>
+        <Layout />
+      </UserAuthContextProvider>
+    ),
     children: [
       { index: true, element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
@@ -16,7 +21,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <PrivateRoutes />,
+    element: (
+      <UserAuthContextProvider>
+        <PrivateRoutes />
+      </UserAuthContextProvider>
+    ),
     children: [{ path: "/useraccount", element: <UserAccountPage /> }],
   },
 ]);

@@ -1,22 +1,13 @@
 import { Button } from "@chakra-ui/react";
-import { User, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
+import { useUserAuth } from "../context/UserAuthContext";
 
 export const UserAccountPage = () => {
-  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  console.log(auth);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { user } = useUserAuth();
+  console.log("TEST", user);
 
   const handleLogout = async () => {
     try {
@@ -28,7 +19,11 @@ export const UserAccountPage = () => {
   };
   return (
     <div>
-      <p>Current User : {user?.displayName}</p>
+      <p>
+        {user?.displayName === ""
+          ? "Welcome to the expense tracker app"
+          : "Welcome back, " + user?.displayName}
+      </p>
       <Button onClick={handleLogout}>Logout</Button>
     </div>
   );

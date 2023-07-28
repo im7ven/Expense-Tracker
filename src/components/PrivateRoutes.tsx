@@ -1,9 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { auth } from "../config/firebase";
+import { useUserAuth } from "../context/UserAuthContext";
+import { Spinner } from "@chakra-ui/react";
 
 export const PrivateRoutes = () => {
-  if (auth.currentUser === null) {
-    return <Navigate to="/" />;
+  const { user, authStateRestored } = useUserAuth();
+
+  if (!authStateRestored) {
+    return <Spinner></Spinner>;
+  }
+  if (!user) {
+    return <Navigate to="/login" />;
   } else {
     return <Outlet />;
   }

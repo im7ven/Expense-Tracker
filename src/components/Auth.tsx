@@ -1,6 +1,7 @@
 import {
   Badge,
   Box,
+  Text,
   Button,
   Center,
   Container,
@@ -8,15 +9,12 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import {
-  UserCredential,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
+import { useUserAuth } from "../context/UserAuthContext";
+import { FirebaseError } from "firebase/app";
 
 interface Props {
   isLogin: boolean;
@@ -26,41 +24,30 @@ export const Auth = ({ isLogin }: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn, signUp } = useUserAuth();
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      let userCredential: UserCredential | null = null;
-
       if (isLogin) {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await signIn(email, password);
         navigate("/useraccount");
+        console.log("this is test2", auth.currentUser);
       } else {
-        userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        navigate("/login");
-      }
-
-      if (!isLogin && userCredential !== null) {
+        await signUp(email, password);
         await updateName(name);
+        navigate("/useraccount");
       }
-      console.log(userCredential);
-    } catch (error) {
-      console.log(error);
+    } catch (err: unknown) {
+      if (err instanceof FirebaseError) setError(err.message);
     }
   };
 
   const updateName = async (name: string) => {
+    console.log("this is my test", auth.currentUser);
     try {
       if (auth.currentUser !== null)
         await updateProfile(auth.currentUser, { displayName: name });
@@ -128,6 +115,7 @@ export const Auth = ({ isLogin }: Props) => {
             ) : (
               <Link to={"/login"}>Already have an account? Login</Link>
             )}
+            {error !== "" && <Text color="red">{error}</Text>}
           </FormControl>
         </form>
       </Container>
