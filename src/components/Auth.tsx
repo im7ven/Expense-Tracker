@@ -46,16 +46,6 @@ export const Auth = ({ isLogin }: Props) => {
     }
   };
 
-  const updateName = async (name: string) => {
-    console.log("this is my test", auth.currentUser);
-    try {
-      if (auth.currentUser !== null)
-        await updateProfile(auth.currentUser, { displayName: name });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <Box
       display="flex"
