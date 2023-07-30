@@ -5,41 +5,22 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import { addDoc, collection } from "firebase/firestore";
 import { FormEvent, useState } from "react";
-import { db } from "../config/firebase";
-import { useUserAuth } from "../context/UserAuthContext";
+import { useExpense } from "../context/ExpenseContext";
 import categories from "./ExpenseCategoryData";
-
-interface ExpenseData {
-  expenseName: string;
-  category: string;
-  amount: string;
-  date: string;
-}
 
 export const ExpenseForm = () => {
   const [expenseName, setExpenseName] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
-  const { user } = useUserAuth();
+  const { addExpense } = useExpense();
 
   const date = new Date().getDay().toString();
-
-  const expenseData: ExpenseData = {
-    expenseName,
-    category,
-    amount,
-    date,
-  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      if (user?.uid) {
-        const userExpenseRef = collection(db, "users", user?.uid, "expenses");
-        await addDoc(userExpenseRef, expenseData);
-      }
+      addExpense(expenseName, category, amount, date);
     } catch (error) {
       console.log(error);
     }

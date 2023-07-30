@@ -1,63 +1,49 @@
-import { Spinner, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../config/firebase";
-import { useUserAuth } from "../context/UserAuthContext";
-
-interface Expense {
-  id: string;
-  expenseName: string;
-  category: string;
-  amount: string;
-  date: string;
-}
+import {
+  Button,
+  Spinner,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { useExpense } from "../context/ExpenseContext";
 
 export const ExpenseList = () => {
-  const [expenses, setExpenses] = useState<Expense[]>();
-  const [dataReceived, setDataReceived] = useState(false);
-  const { user } = useUserAuth();
-  useEffect(() => {
-    if (user?.uid) {
-      const userExpenseRef = collection(db, "users", user?.uid, "expenses");
-
-      const unsubscribe = onSnapshot(userExpenseRef, (querySnapshot) => {
-        setDataReceived(true);
-        const expenseData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Expense[];
-        setExpenses(expenseData);
-      });
-
-      return () => unsubscribe();
-    }
-  }, [user]);
+  const { expenses, dataReceived, handleDeleteExpense } = useExpense();
 
   if (dataReceived !== true) {
     return <Spinner size="xl"></Spinner>;
   }
 
-  return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Expense</Th>
-          <Th>Category</Th>
-          <Th>Amount</Th>
-          <Th>Date Added</Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {expenses?.map((expense) => (
-          <Tr key={expense.id}>
-            <Td>{expense.expenseName}</Td>
-            <Td>{expense.category}</Td>
-            <Td>{expense.amount}</Td>
-            <Td>{expense.date}</Td>
+  if (expenses?.length !== 0)
+    return (
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Expense</Th>
+            <Th>Category</Th>
+            <Th>Amount</Th>
+            <Th>Date Added</Th>
+            <Th></Th>
           </Tr>
-        ))}
-      </Tbody>
-    </Table>
-  );
+        </Thead>
+        <Tbody>
+          {expenses?.map((expense) => (
+            <Tr key={expense.id}>
+              <Td>{expense.expenseName}</Td>
+              <Td>{expense.category}</Td>
+              <Td>{expense.amount}</Td>
+              <Td>{expense.date}</Td>
+              <Td>
+                <Button onClick={() => handleDeleteExpense(expense.id)}>
+                  Delete
+                </Button>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    );
 };

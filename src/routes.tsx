@@ -5,13 +5,16 @@ import { SignupPage } from "./pages/Signup";
 import { UserAccountPage } from "./pages/UserAccountPage";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
+import { ExpenseContextProvider } from "./context/ExpenseContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <UserAuthContextProvider>
-        <Layout />
+        <ExpenseContextProvider>
+          <Layout />
+        </ExpenseContextProvider>
       </UserAuthContextProvider>
     ),
     children: [
@@ -23,7 +26,9 @@ const router = createBrowserRouter([
   {
     element: (
       <UserAuthContextProvider>
-        <PrivateRoutes />
+        <ExpenseContextProvider>
+          <PrivateRoutes />
+        </ExpenseContextProvider>
       </UserAuthContextProvider>
     ),
     children: [{ path: "/useraccount", element: <UserAccountPage /> }],
