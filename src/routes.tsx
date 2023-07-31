@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { LoginPage } from "./pages/LoginPage";
-import { Layout } from "./pages/Layout";
+import { HomeLayout } from "./pages/HomeLayout";
 import { SignupPage } from "./pages/Signup";
 import { UserAccountPage } from "./pages/UserAccountPage";
 import { PrivateRoutes } from "./components/PrivateRoutes";
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: (
       <UserAuthContextProvider>
         <ExpenseContextProvider>
-          <Layout />
+          <HomeLayout />
         </ExpenseContextProvider>
       </UserAuthContextProvider>
     ),

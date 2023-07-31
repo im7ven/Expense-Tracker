@@ -15,7 +15,7 @@ export const ExpenseForm = () => {
   const [amount, setAmount] = useState("");
   const { addExpense } = useExpense();
 
-  const date = new Date().getDay().toString();
+  const date = new Date().toDateString();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

@@ -1,6 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useUserAuth } from "../context/UserAuthContext";
 import { Spinner } from "@chakra-ui/react";
+import { Navigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
+import { UserLayout } from "../pages/UserLayout";
 
 export const PrivateRoutes = () => {
   const { user, authStateRestored } = useUserAuth();
@@ -11,6 +12,6 @@ export const PrivateRoutes = () => {
   if (!user) {
     return <Navigate to="/login" />;
   } else {
-    return <Outlet />;
+    return <UserLayout />;
   }
 };
