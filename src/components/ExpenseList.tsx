@@ -10,8 +10,19 @@ import {
 } from "@chakra-ui/react";
 import { useExpense } from "../context/ExpenseContext";
 
-export const ExpenseList = () => {
+interface Props {
+  selectedCategory: string;
+}
+
+export const ExpenseList = ({ selectedCategory }: Props) => {
   const { expenses, dataReceived, handleDeleteExpense } = useExpense();
+
+  const filteredExpenses = expenses?.every(
+    (e) => e.category !== selectedCategory
+  )
+    ? expenses
+    : expenses?.filter((expense) => expense.category === selectedCategory);
+  console.log(selectedCategory);
 
   if (dataReceived !== true) {
     return <Spinner size="xl"></Spinner>;
@@ -30,7 +41,7 @@ export const ExpenseList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {expenses?.map((expense) => (
+          {filteredExpenses?.map((expense) => (
             <Tr key={expense.id}>
               <Td>{expense.expenseName}</Td>
               <Td>{expense.category}</Td>
