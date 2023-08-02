@@ -1,61 +1,82 @@
 import {
+  Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Select,
 } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useExpense } from "../context/ExpenseContext";
 import categories from "./ExpenseCategoryData";
 
-export const ExpenseForm = () => {
-  const [expenseName, setExpenseName] = useState("");
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState("");
-  const { addExpense } = useExpense();
+interface ExpenseFormInputs {
+  expenseName: string;
+  category: string;
+  amount: string;
+}
 
+export const ExpenseForm = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<ExpenseFormInputs>();
+  const { addExpense } = useExpense();
   const date = new Date().toDateString();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ExpenseFormInputs) => {
     try {
-      addExpense(expenseName, category, amount, date);
+      await addExpense(data.expenseName, data.category, data.amount, date);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl mb={4}>
-        <FormLabel>Expense</FormLabel>
-        <Input
-          onChange={(e) => setExpenseName(e.target.value)}
-          placeholder="Enter an expense"
-        />
-      </FormControl>
-      <FormControl mb={4}>
-        <FormLabel>Category</FormLabel>
-        <Select
-          onChange={(e) => setCategory(e.target.value)}
-          placeholder="Select a category "
-        >
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <FormLabel>Amount</FormLabel>
-        <Input
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="Enter the amount"
-        />
-      </FormControl>
-      <Button onClick={handleSubmit}>Submit</Button>
-    </form>
+    <Box>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl isInvalid={!!errors.expenseName} mb={4}>
+          <FormLabel>Expense</FormLabel>
+          <Input
+            {...register("expenseName", {
+              required: "Expense is required.",
+            })}
+            placeholder="Enter an expense"
+          />
+          <FormErrorMessage>{errors.expenseName?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={!!errors.category} mb={4}>
+          <FormLabel>Category</FormLabel>
+          <Select
+            {...register("category", {
+              required: "Category is required.",
+            })}
+            placeholder="Select a category"
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </Select>
+          <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={!!errors.amount} mb={4}>
+          <FormLabel>Amount</FormLabel>
+          <Input
+            {...register("amount", {
+              required: "Amount is required.",
+            })}
+            placeholder="Enter the amount"
+          />
+          <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
+        </FormControl>
+        <Button mt={5} width="100%" type="submit">
+          Submit
+        </Button>
+      </form>
+    </Box>
   );
 };
