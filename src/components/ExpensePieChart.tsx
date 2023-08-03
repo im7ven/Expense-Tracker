@@ -4,12 +4,13 @@ import {
   Chart as ChartJS,
   ChartOptions,
   Legend,
+  PieController,
   Tooltip,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { useExpense } from "../context/ExpenseContext";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, PieController);
 interface ExpenseObj {
   category: string;
   amount: number;
