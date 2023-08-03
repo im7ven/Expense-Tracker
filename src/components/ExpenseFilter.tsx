@@ -15,6 +15,8 @@ export const ExpenseFilter = ({
   return (
     <Box display="inline-block">
       <Select
+        bg="#232323"
+        variant="filled"
         flexGrow={0}
         placeholder="Filter by category"
         value={selectedCategory}

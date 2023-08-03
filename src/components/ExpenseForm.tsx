@@ -1,12 +1,16 @@
 import {
   Box,
   Button,
+  CloseButton,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  HStack,
+  Heading,
   Input,
   Select,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useExpense } from "../context/ExpenseContext";
 import categories from "./ExpenseCategoryData";
@@ -15,9 +19,14 @@ interface ExpenseFormInputs {
   expenseName: string;
   category: string;
   amount: string;
+  date: string;
 }
 
-export const ExpenseForm = () => {
+interface Props {
+  onCloseForm: () => void;
+}
+
+export const ExpenseForm = ({ onCloseForm }: Props) => {
   const {
     handleSubmit,
     register,
@@ -35,7 +44,19 @@ export const ExpenseForm = () => {
   };
 
   return (
-    <Box>
+    <Box
+      as={motion.div}
+      transition={{ duration: "0.3" }}
+      animate={{ y: [-40, 0] }}
+    >
+      <HStack justify="space-between" mb={5}>
+        <Heading size="lg">Fill out the form to add expenses</Heading>
+        <CloseButton
+          size="lg"
+          alignSelf="right"
+          onClick={() => onCloseForm()}
+        />
+      </HStack>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.expenseName} mb={4}>
           <FormLabel>Expense</FormLabel>
@@ -73,7 +94,8 @@ export const ExpenseForm = () => {
           />
           <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
         </FormControl>
-        <Button mt={5} width="100%" type="submit">
+
+        <Button width="100%" type="submit">
           Submit
         </Button>
       </form>

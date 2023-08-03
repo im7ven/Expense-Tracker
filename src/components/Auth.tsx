@@ -1,20 +1,19 @@
 import {
   Badge,
   Box,
-  Text,
   Button,
   Center,
   Container,
   FormControl,
   FormLabel,
   Input,
+  Text,
 } from "@chakra-ui/react";
-import { updateProfile } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { useUserAuth } from "../context/UserAuthContext";
-import { FirebaseError } from "firebase/app";
 
 interface Props {
   isLogin: boolean;
@@ -52,6 +51,7 @@ export const Auth = ({ isLogin }: Props) => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
+      borderRadius={20}
     >
       <Container px={0} pt={8} bg="#232323">
         <Badge
@@ -82,7 +82,7 @@ export const Auth = ({ isLogin }: Props) => {
             <Input
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              mb={6}
+              mb={4}
               variant="outline"
               type="email"
               id="email"
@@ -98,12 +98,18 @@ export const Auth = ({ isLogin }: Props) => {
               placeholder="Enter your email"
             />
             <Center mt={5}>
-              <Button type="submit">{isLogin ? "Login" : "Sign Up"}</Button>
+              <Button width="100%" type="submit">
+                {isLogin ? "Login" : "Sign Up"}
+              </Button>
             </Center>
             {isLogin ? (
-              <Link to={"/signup"}>Need an account? Sign Up</Link>
+              <Text mt={5} textAlign="center">
+                Need an account?<Link to={"/signup"}> Sign Up</Link>
+              </Text>
             ) : (
-              <Link to={"/login"}>Already have an account? Login</Link>
+              <Text mt={5} textAlign="center">
+                Already have an account? <Link to={"/login"}>Login</Link>
+              </Text>
             )}
             {error !== "" && <Text color="red">{error}</Text>}
           </FormControl>

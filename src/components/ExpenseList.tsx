@@ -30,13 +30,13 @@ export const ExpenseList = ({ selectedCategory }: Props) => {
 
   if (expenses?.length !== 0)
     return (
-      <Table>
+      <Table size="sm">
         <Thead>
           <Tr>
             <Th>Expense</Th>
             <Th>Category</Th>
             <Th>Amount</Th>
-            <Th>Date Added</Th>
+            <Th>Date </Th>
             <Th></Th>
           </Tr>
         </Thead>

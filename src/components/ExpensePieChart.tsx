@@ -1,7 +1,13 @@
-import { useExpense } from "../context/ExpenseContext";
-import { HStack, ScaleFade, useDisclosure } from "@chakra-ui/react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Box, Heading } from "@chakra-ui/react";
+import {
+  ArcElement,
+  Chart as ChartJS,
+  ChartOptions,
+  Legend,
+  Tooltip,
+} from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { useExpense } from "../context/ExpenseContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 interface ExpenseObj {
@@ -50,10 +56,49 @@ export const ExpensePieChart = () => {
     ],
   };
 
+  const formatTooltipLabel = (tooltipItem: any) => {
+    const value = tooltipItem.parsed;
+    return value ? `$${value.toFixed(2)}` : "";
+  };
+
+  const options: ChartOptions<"pie"> = {
+    plugins: {
+      legend: {
+        title: {
+          text: "Current Expense Categories",
+          display: true,
+          padding: 30,
+          color: "#fff",
+          font: {
+            size: 20,
+          },
+        },
+        align: "start",
+        position: "bottom",
+        labels: {
+          color: "#fff",
+          boxWidth: 30,
+          boxHeight: 30,
+          font: {
+            size: 13,
+          },
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: formatTooltipLabel,
+        },
+      },
+    },
+  };
+
   if (expenses?.length !== 0)
     return (
-      <HStack>
-        <Pie data={data} />
-      </HStack>
+      <Box width="100%">
+        <Heading textAlign="center" mb={5}>
+          Visualize you're Expenses
+        </Heading>
+        <Pie data={data} options={options} />
+      </Box>
     );
 };

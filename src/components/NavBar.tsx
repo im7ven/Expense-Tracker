@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Heading, Spacer } from "@chakra-ui/react";
+import { Flex, HStack, Heading, Spacer } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { GiTakeMyMoney } from "react-icons/gi";
 
