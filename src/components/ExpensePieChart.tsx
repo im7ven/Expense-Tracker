@@ -65,18 +65,6 @@ export const ExpensePieChart = () => {
   const options: ChartOptions<"pie"> = {
     plugins: {
       legend: {
-        title: {
-          text: "Current Expense Categories",
-          display: true,
-          padding: {
-            left: 30,
-            top: 30,
-          },
-          color: "#fff",
-          font: {
-            size: 20,
-          },
-        },
         align: "start",
         position: "bottom",
         labels: {
