@@ -68,7 +68,10 @@ export const ExpensePieChart = () => {
         title: {
           text: "Current Expense Categories",
           display: true,
-          padding: 30,
+          padding: {
+            left: 30,
+            top: 30,
+          },
           color: "#fff",
           font: {
             size: 20,
