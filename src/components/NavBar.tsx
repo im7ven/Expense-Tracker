@@ -10,7 +10,7 @@ export const NavBar = ({ children }: Props) => {
   return (
     <Flex padding={3} alignItems="center">
       <HStack>
-        <GiTakeMyMoney color="green" size="60px" />
+        <GiTakeMyMoney color="#2cb67d" size="60px" />
         <Heading>Expense Tracker</Heading>
       </HStack>
       <Spacer />
