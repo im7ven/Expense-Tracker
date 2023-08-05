@@ -51,13 +51,14 @@ export const Auth = ({ isLogin }: Props) => {
       justifyContent="center"
       alignItems="center"
       minHeight="100vh"
-      borderRadius={20}
+      px={4}
     >
-      <Container px={0} pt={8} bg="#232323">
+      <Container bg="brand.secondaryBg" borderRadius={10} px={0} pt={8}>
         <Badge
           className="greeting-badge"
+          bg="brand.primary"
           py={5}
-          px={9}
+          px={5}
           borderRadius={{ tl: 0, tr: "lg", bl: 0, br: "lg" }}
         >
           {isLogin ? "Welcome Back" : "Create an account to get started"}
@@ -111,7 +112,7 @@ export const Auth = ({ isLogin }: Props) => {
                 Already have an account? <Link to={"/login"}>Login</Link>
               </Text>
             )}
-            {error !== "" && <Text color="red">{error}</Text>}
+            <Center>{error !== "" && <Text color="red">{error}</Text>}</Center>
           </FormControl>
         </form>
       </Container>
