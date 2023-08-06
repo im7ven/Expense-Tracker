@@ -39,19 +39,19 @@ export const ExpensePieChart = () => {
       {
         data: expenseObj.map((expense) => expense.amount),
         backgroundColor: [
-          "#6200F5",
-          "#E4BA00",
+          "#C6C04C",
+          "#4CC77D",
+          "#BA5B5B",
+          "#5A3D85",
+          "#79B167",
+          "#935B1B",
+          "#7897AC",
+          "#FA5C39",
+          "#9545FD",
+          "#C293C7",
+          "#F57373",
+          "#7B544B",
           "#232323",
-          "#FF2C2C",
-          "#78D300",
-          "#00C2D4",
-          "#8A00D4",
-          "#00D463",
-          "#0063D4",
-          "#D400C9",
-          "#D40063",
-          "#09D6FF",
-          "#DCD387",
         ],
       },
     ],
@@ -86,7 +86,7 @@ export const ExpensePieChart = () => {
 
   if (expenses?.length !== 0)
     return (
-      <VStack px="50px" width="100%" maxHeight="450px">
+      <VStack pl="50px" width="100%" maxHeight="450px">
         <Heading textAlign="center" mb={5}>
           Visualize you're Expenses
         </Heading>

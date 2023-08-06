@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   HStack,
   SimpleGrid,
   Spacer,
@@ -43,18 +44,21 @@ export const UserAccountPage = () => {
           <ExpenseForm onCloseForm={handleCloseExpenseForm} />
         ) : null}
 
-        <HStack>
-          <Button></Button>
-          {/* <ExpenseFilter /> */}
-          <Button colorScheme="green" onClick={() => setFormVisibility(true)}>
-            Add Expense
-          </Button>
+        <Flex>
+          <HStack>
+            <ExpenseFilter />
+            <Button colorScheme="green" onClick={() => setFormVisibility(true)}>
+              Add Expense
+            </Button>
+          </HStack>
           <Spacer />
-          <Stat>
-            <StatLabel>Total</StatLabel>
-            <StatNumber>${totalExpenseAmount}</StatNumber>
-          </Stat>
-        </HStack>
+          <Box>
+            <Stat>
+              <StatLabel>Total</StatLabel>
+              <StatNumber>${totalExpenseAmount}</StatNumber>
+            </Stat>
+          </Box>
+        </Flex>
         {expenseDataRender}
       </Box>
 
