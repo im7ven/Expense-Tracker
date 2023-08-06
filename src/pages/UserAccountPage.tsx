@@ -40,7 +40,7 @@ export const UserAccountPage = () => {
     .toFixed(2);
 
   return (
-    <SimpleGrid mt={10} padding={6} spacing={5} columns={{ base: 1, lg: 2 }}>
+    <SimpleGrid mt={10} padding={6} spacing={5} columns={{ base: 1, xl: 2 }}>
       <Box>
         {isFormVisible ? (
           <ExpenseForm onCloseForm={handleCloseExpenseForm} />

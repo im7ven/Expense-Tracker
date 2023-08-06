@@ -86,7 +86,7 @@ export const ExpensePieChart = () => {
 
   if (expenses?.length !== 0)
     return (
-      <VStack pl="50px" width="100%" maxHeight="450px">
+      <VStack width="100%" maxHeight="450px">
         <Heading textAlign="center" mb={5}>
           Visualize you're Expenses
         </Heading>

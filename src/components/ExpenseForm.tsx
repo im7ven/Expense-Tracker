@@ -95,7 +95,7 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
           <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
         </FormControl>
 
-        <Button width="100%" type="submit">
+        <Button bg="brand.tertiary" width="100%" type="submit">
           Submit
         </Button>
       </form>
