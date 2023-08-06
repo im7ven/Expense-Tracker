@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
   SimpleGrid,
   Spacer,
   Stack,
@@ -14,11 +13,11 @@ import {
 import { useState } from "react";
 import { ExpenseFilter } from "../components/ExpenseFilter";
 import { ExpenseForm } from "../components/ExpenseForm";
-import { ExpensePieChart } from "../components/ExpensePieChart";
-import { useExpense } from "../context/ExpenseContext";
-import { ExpenseTable } from "../components/ExpenseTable";
 import { ExpenseList } from "../components/ExpenseList";
+import { ExpensePieChart } from "../components/ExpensePieChart";
 import { ExpensePlaceholder } from "../components/ExpensePlaceholder";
+import { ExpenseTable } from "../components/ExpenseTable";
+import { useExpense } from "../context/ExpenseContext";
 
 export const UserAccountPage = () => {
   const [isFormVisible, setFormVisibility] = useState(false);

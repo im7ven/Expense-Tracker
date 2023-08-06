@@ -1,4 +1,4 @@
-import { Box, Center, Heading, VStack } from "@chakra-ui/react";
+import { Heading, VStack } from "@chakra-ui/react";
 import {
   ArcElement,
   Chart as ChartJS,

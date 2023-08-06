@@ -1,5 +1,4 @@
 import {
-  Button,
   CloseButton,
   Spinner,
   Table,
@@ -8,9 +7,7 @@ import {
   Th,
   Thead,
   Tr,
-  useBreakpointValue,
 } from "@chakra-ui/react";
-import { IoClose } from "react-icons/io5";
 import { useExpense } from "../context/ExpenseContext";
 
 export const ExpenseTable = () => {
@@ -22,11 +19,6 @@ export const ExpenseTable = () => {
   )
     ? expenses
     : expenses?.filter((expense) => expense.category === selectedCategory);
-
-  const removeBtnLabel = useBreakpointValue({
-    base: <IoClose size="20px" />,
-    md: "Remove",
-  });
 
   if (dataReceived !== true) {
     return <Spinner size="xl"></Spinner>;

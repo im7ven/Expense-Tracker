@@ -1,13 +1,11 @@
 import {
   CloseButton,
-  Flex,
   HStack,
   Heading,
   List,
   ListItem,
   Spacer,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import { useExpense } from "../context/ExpenseContext";
 
