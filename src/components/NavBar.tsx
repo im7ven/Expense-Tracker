@@ -11,7 +11,7 @@ export const NavBar = ({ children }: Props) => {
     <Flex padding={3} alignItems="center">
       <HStack>
         <GiTakeMyMoney color="#2cb67d" size="60px" />
-        <Heading>Expense Tracker</Heading>
+        <Heading>Xpense Tracker</Heading>
       </HStack>
       <Spacer />
       {children}
