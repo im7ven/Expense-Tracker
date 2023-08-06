@@ -72,7 +72,6 @@ export const Auth = ({ isLogin }: Props) => {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   mb={6}
-                  variant="outline"
                   type="name"
                   id="name"
                   placeholder="Enter your name"
@@ -84,7 +83,6 @@ export const Auth = ({ isLogin }: Props) => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               mb={4}
-              variant="outline"
               type="email"
               id="email"
               placeholder="Enter your email"

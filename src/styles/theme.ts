@@ -1,11 +1,12 @@
-import { extendTheme } from "@chakra-ui/react";
+import { ThemeConfig, extendTheme } from "@chakra-ui/react";
 import { ButtonStyles as Button } from "./components/ButtonStyles";
 
-// const config: ThemeConfig = {
-//   initialColorMode: "dark",
-// };
+const config: ThemeConfig = {
+  initialColorMode: "dark",
+};
 
 const theme = extendTheme({
+  config,
   styles: {
     global: {
       body: {
