@@ -1,16 +1,8 @@
 import { Box, Select } from "@chakra-ui/react";
 import { useExpense } from "../context/ExpenseContext";
 
-interface Props {
-  selectedCategory: string;
-  handleSelectedCategory: (category: string) => void;
-}
-
-export const ExpenseFilter = ({
-  selectedCategory,
-  handleSelectedCategory,
-}: Props) => {
-  const { expenses } = useExpense();
+export const ExpenseFilter = () => {
+  const { expenses, handleSelectedCategory, selectedCategory } = useExpense();
 
   return (
     <Box display="inline-block">
