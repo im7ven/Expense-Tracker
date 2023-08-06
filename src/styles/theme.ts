@@ -25,6 +25,7 @@ const theme = extendTheme({
       primary: "#7f5af0",
       secondary: "#72757e",
       tertiary: "#2cb67d",
+      text: "#94a1b2",
     },
   },
   components: {

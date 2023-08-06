@@ -31,6 +31,8 @@ interface ExpenseContextValue {
   expenses?: Expense[];
   handleDeleteExpense: (expenseId: string) => Promise<void>;
   dataReceived: boolean;
+  selectedCategory: string;
+  handleSelectedCategory: (category: string) => void;
   addExpense: (
     expenseName: string,
     category: string,
@@ -43,6 +45,12 @@ const ExpenseContext = createContext<ExpenseContextValue>(
   {} as ExpenseContextValue
 );
 export const ExpenseContextProvider = ({ children }: Props) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleSelectedCategory = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   const addExpense = async (
     expenseName: string,
     category: string,
@@ -94,6 +102,8 @@ export const ExpenseContextProvider = ({ children }: Props) => {
     expenses,
     dataReceived,
     addExpense,
+    selectedCategory,
+    handleSelectedCategory,
   };
 
   return (

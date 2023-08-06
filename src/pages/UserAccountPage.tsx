@@ -7,26 +7,28 @@ import {
   Stat,
   StatLabel,
   StatNumber,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ExpenseFilter } from "../components/ExpenseFilter";
 import { ExpenseForm } from "../components/ExpenseForm";
-import { ExpenseList } from "../components/ExpenseList";
 import { ExpensePieChart } from "../components/ExpensePieChart";
 import { useExpense } from "../context/ExpenseContext";
+import { ExpenseTable } from "../components/ExpenseTable";
+import { ExpenseList } from "../components/ExpenseList";
 
 export const UserAccountPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [isFormVisible, setFormVisibility] = useState(false);
   const { expenses } = useExpense();
-
-  const handleSelectedCategory = (category: string) => {
-    setSelectedCategory(category);
-  };
 
   const handleCloseExpenseForm = () => {
     setFormVisibility(false);
   };
+
+  const expenseDataRender = useBreakpointValue({
+    base: <ExpenseList />,
+    sm: <ExpenseTable />,
+  });
 
   const totalExpenseAmount = expenses
     ?.reduce((acc, expense) => {
@@ -35,17 +37,15 @@ export const UserAccountPage = () => {
     .toFixed(2);
 
   return (
-    <SimpleGrid spacing="50px" padding={6} columns={{ base: 1, lg: 2 }}>
+    <SimpleGrid mt={10} spacing="50px" padding={6} columns={{ base: 1, lg: 2 }}>
       <Box>
         {isFormVisible ? (
           <ExpenseForm onCloseForm={handleCloseExpenseForm} />
         ) : null}
 
-        <HStack mt={10}>
-          <ExpenseFilter
-            selectedCategory={selectedCategory}
-            handleSelectedCategory={handleSelectedCategory}
-          />
+        <HStack>
+          <Button></Button>
+          {/* <ExpenseFilter /> */}
           <Button colorScheme="green" onClick={() => setFormVisibility(true)}>
             Add Expense
           </Button>
@@ -55,7 +55,7 @@ export const UserAccountPage = () => {
             <StatNumber>${totalExpenseAmount}</StatNumber>
           </Stat>
         </HStack>
-        <ExpenseList selectedCategory={selectedCategory} />
+        {expenseDataRender}
       </Box>
 
       <ExpensePieChart />

@@ -1,60 +1,53 @@
 import {
-  Button,
-  Spinner,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
+  CloseButton,
+  Flex,
+  HStack,
+  Heading,
+  List,
+  ListItem,
+  Spacer,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { useExpense } from "../context/ExpenseContext";
 
-interface Props {
-  selectedCategory: string;
-}
+export const ExpenseList = () => {
+  const { expenses, handleDeleteExpense } = useExpense();
 
-export const ExpenseList = ({ selectedCategory }: Props) => {
-  const { expenses, dataReceived, handleDeleteExpense } = useExpense();
-
-  const filteredExpenses = expenses?.every(
-    (e) => e.category !== selectedCategory
-  )
-    ? expenses
-    : expenses?.filter((expense) => expense.category === selectedCategory);
-  console.log(selectedCategory);
-
-  if (dataReceived !== true) {
-    return <Spinner size="xl"></Spinner>;
-  }
-
-  if (expenses?.length !== 0)
-    return (
-      <Table size="sm">
-        <Thead>
-          <Tr>
-            <Th>Expense</Th>
-            <Th>Category</Th>
-            <Th>Amount</Th>
-            <Th>Date </Th>
-            <Th></Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {filteredExpenses?.map((expense) => (
-            <Tr key={expense.id}>
-              <Td>{expense.expenseName}</Td>
-              <Td>{expense.category}</Td>
-              <Td>{expense.amount}</Td>
-              <Td>{expense.date}</Td>
-              <Td>
-                <Button onClick={() => handleDeleteExpense(expense.id)}>
-                  Delete
-                </Button>
-              </Td>
-            </Tr>
+  const expenseHeadings = ["Expense", "Category", "Amount"];
+  return (
+    <List spacing={5}>
+      <ListItem>
+        <HStack>
+          {expenseHeadings.map((item) => (
+            <>
+              <Heading color="brand.text" size="xs" key={item}>
+                {item}
+              </Heading>
+              <Spacer />
+            </>
           ))}
-        </Tbody>
-      </Table>
-    );
+        </HStack>
+      </ListItem>
+      {expenses?.map((expense) => (
+        <ListItem key={expense.id}>
+          <HStack>
+            <Text color="#fff">{expense.expenseName}</Text>
+            <Spacer />
+            <Text color="#fff"> {expense.category}</Text>
+            <Spacer />
+            <Text ml={6} color="#fff">
+              {expense.amount}
+            </Text>
+            <Spacer />
+
+            <CloseButton
+              onClick={() => handleDeleteExpense(expense.id)}
+              bg="brand.primary"
+            />
+          </HStack>
+        </ListItem>
+      ))}
+    </List>
+  );
 };
