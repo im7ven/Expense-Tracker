@@ -17,6 +17,7 @@ import { ExpensePieChart } from "../components/ExpensePieChart";
 import { useExpense } from "../context/ExpenseContext";
 import { ExpenseTable } from "../components/ExpenseTable";
 import { ExpenseList } from "../components/ExpenseList";
+import { ExpensePlaceholder } from "../components/ExpensePlaceholder";
 
 export const UserAccountPage = () => {
   const [isFormVisible, setFormVisibility] = useState(false);
@@ -59,7 +60,7 @@ export const UserAccountPage = () => {
             </Stat>
           </Box>
         </Flex>
-        {expenseDataRender}
+        {expenses?.length === 0 ? <ExpensePlaceholder /> : expenseDataRender}
       </Box>
 
       <ExpensePieChart />
