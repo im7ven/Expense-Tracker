@@ -34,7 +34,7 @@ export const ExpenseTable = () => {
 
   if (expenses?.length !== 0)
     return (
-      <Table size="sm">
+      <Table>
         <Thead>
           <Tr>
             <Th>Expense</Th>

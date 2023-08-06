@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import {
   ArcElement,
   Chart as ChartJS,
@@ -86,11 +86,12 @@ export const ExpensePieChart = () => {
 
   if (expenses?.length !== 0)
     return (
-      <Box width="100%">
+      <VStack px="50px" width="100%" maxHeight="450px">
         <Heading textAlign="center" mb={5}>
           Visualize you're Expenses
         </Heading>
+
         <Pie data={data} options={options} />
-      </Box>
+      </VStack>
     );
 };
