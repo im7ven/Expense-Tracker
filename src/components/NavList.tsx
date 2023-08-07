@@ -16,10 +16,16 @@ export const NavList = () => {
   };
 
   return (
-    <HStack>
-      <Link to="/useraccount">Home</Link>
-      <Link to="/userbudget">Budget</Link>
-      <Text onClick={handleLogout}>Logout</Text>
+    <HStack spacing={5}>
+      <Text fontSize="lg">
+        <Link to="/useraccount">Home</Link>
+      </Text>
+      <Text fontSize="lg">
+        <Link to="/userbudget">Budget</Link>
+      </Text>
+      <Text cursor="pointer" fontSize="lg" onClick={handleLogout}>
+        Logout
+      </Text>
     </HStack>
   );
 };
