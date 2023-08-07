@@ -6,6 +6,7 @@ import { UserAccountPage } from "./pages/UserAccountPage";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import { ExpenseContextProvider } from "./context/ExpenseContext";
+import { UserBudget } from "./pages/UserBudget";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,10 @@ const router = createBrowserRouter([
         </ExpenseContextProvider>
       </UserAuthContextProvider>
     ),
-    children: [{ path: "/useraccount", element: <UserAccountPage /> }],
+    children: [
+      { path: "/useraccount", element: <UserAccountPage /> },
+      { path: "/userbudget", element: <UserBudget /> },
+    ],
   },
 ]);
 

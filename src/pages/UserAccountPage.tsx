@@ -18,6 +18,7 @@ import { ExpensePieChart } from "../components/ExpensePieChart";
 import { ExpensePlaceholder } from "../components/ExpensePlaceholder";
 import { ExpenseTable } from "../components/ExpenseTable";
 import { useExpense } from "../context/ExpenseContext";
+import { ExpenseBudgetForm } from "../components/ExpenseBudgetForm";
 
 export const UserAccountPage = () => {
   const [isFormVisible, setFormVisibility] = useState(false);
@@ -64,6 +65,7 @@ export const UserAccountPage = () => {
       </Box>
 
       <ExpensePieChart />
+      <ExpenseBudgetForm />
     </SimpleGrid>
   );
 };
