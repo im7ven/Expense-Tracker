@@ -46,6 +46,9 @@ const ExpenseContext = createContext<ExpenseContextValue>(
 );
 export const ExpenseContextProvider = ({ children }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [expenses, setExpenses] = useState<Expense[]>();
+  const [dataReceived, setDataReceived] = useState(false);
+  const { user } = useUserAuth();
 
   const handleSelectedCategory = (category: string) => {
     setSelectedCategory(category);
@@ -66,9 +69,6 @@ export const ExpenseContextProvider = ({ children }: Props) => {
       console.log(error);
     }
   };
-  const [expenses, setExpenses] = useState<Expense[]>();
-  const [dataReceived, setDataReceived] = useState(false);
-  const { user } = useUserAuth();
   useEffect(() => {
     if (user?.uid) {
       const userExpenseRef = collection(db, "users", user?.uid, "expenses");

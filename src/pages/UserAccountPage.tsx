@@ -18,7 +18,6 @@ import { ExpensePieChart } from "../components/ExpensePieChart";
 import { ExpensePlaceholder } from "../components/ExpensePlaceholder";
 import { ExpenseTable } from "../components/ExpenseTable";
 import { useExpense } from "../context/ExpenseContext";
-import { ExpenseBudgetForm } from "../components/ExpenseBudgetForm";
 
 export const UserAccountPage = () => {
   const [isFormVisible, setFormVisibility] = useState(false);
@@ -46,11 +45,9 @@ export const UserAccountPage = () => {
           <ExpenseForm onCloseForm={handleCloseExpenseForm} />
         ) : null}
 
-        <Flex my={3}>
+        <Flex my={3} alignItems="center">
           <Stack>
-            <Button colorScheme="green" onClick={() => setFormVisibility(true)}>
-              Add Expense
-            </Button>
+            <Button onClick={() => setFormVisibility(true)}>Add Expense</Button>
             <ExpenseFilter />
           </Stack>
           <Spacer />
@@ -65,7 +62,6 @@ export const UserAccountPage = () => {
       </Box>
 
       <ExpensePieChart />
-      <ExpenseBudgetForm />
     </SimpleGrid>
   );
 };
