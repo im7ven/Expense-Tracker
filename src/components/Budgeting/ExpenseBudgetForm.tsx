@@ -9,7 +9,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useBudget } from "../context/UserBudgetContext";
+import { useBudget } from "../../context/UserBudgetContext";
 import { useState } from "react";
 
 interface BudgetFormInput {

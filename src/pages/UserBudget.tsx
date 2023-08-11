@@ -1,4 +1,4 @@
-import { ExpenseBudgetForm } from "../components/ExpenseBudgetForm";
+import { ExpenseBudgetForm } from "../components/Budgeting/ExpenseBudgetForm";
 
 export const UserBudget = () => {
   return (
