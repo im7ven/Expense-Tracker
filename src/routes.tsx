@@ -7,6 +7,7 @@ import { PrivateRoutes } from "./components/PrivateRoutes";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import { ExpenseContextProvider } from "./context/ExpenseContext";
 import { UserBudget } from "./pages/UserBudget";
+import { UserBudgetProvider } from "./context/UserBudgetContext";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
     element: (
       <UserAuthContextProvider>
         <ExpenseContextProvider>
-          <PrivateRoutes />
+          <UserBudgetProvider>
+            <PrivateRoutes />
+          </UserBudgetProvider>
         </ExpenseContextProvider>
       </UserAuthContextProvider>
     ),
