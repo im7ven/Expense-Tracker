@@ -1,47 +1,86 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+} from "@chakra-ui/react";
+import { useForm, useWatch } from "react-hook-form";
 import { useBudget } from "../context/UserBudgetContext";
-import { useState } from "react";
+
+interface BudgetFormInput {
+  startDate: string;
+  endDate: string;
+  amount: string;
+}
 
 export const ExpenseBudgetForm = () => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [amount, setAmount] = useState("");
-  const { addBudget } = useBudget();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BudgetFormInput>();
 
-  const handleBudgetSubmit = () => {
+  const { addBudget } = useBudget();
+  const startDate = watch("startDate");
+
+  const onSubmit = (data: BudgetFormInput) => {
     try {
-      addBudget(startDate, endDate, amount);
+      addBudget(data.startDate, data.endDate, data.amount);
+      console.log("budget success");
     } catch (err) {
       console.log(err);
     }
   };
 
+  const validateEndDate = (value: string) => {
+    if (value && startDate && new Date(value) <= new Date(startDate)) {
+      return "End date must be after the start date";
+    }
+    return true;
+  };
+
   return (
-    <form onSubmit={handleBudgetSubmit}>
-      <FormControl>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormControl mb={3} isInvalid={!!errors.startDate}>
         <FormLabel>Start date</FormLabel>
         <Input
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          {...register("startDate", {
+            required: "Start Date is required",
+          })}
           type="date"
         />
+        {errors.startDate && (
+          <FormErrorMessage>{errors.startDate?.message}</FormErrorMessage>
+        )}
       </FormControl>
-      <FormControl>
+      <FormControl mb={3} isInvalid={!!errors.endDate}>
         <FormLabel>End date</FormLabel>
         <Input
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          {...register("endDate", {
+            required: "End date is required",
+            validate: validateEndDate,
+          })}
           type="date"
         />
+        {errors.endDate && (
+          <FormErrorMessage>{errors.endDate?.message}</FormErrorMessage>
+        )}
       </FormControl>
-      <FormControl>
+      <FormControl mb={3} isInvalid={!!errors.amount}>
         <FormLabel>Budget Amount</FormLabel>
         <Input
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          {...register("amount", { required: "Amount is required" })}
           placeholder="Enter budget amount"
         />
+        {errors.amount && (
+          <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
+        )}
       </FormControl>
+      <Button bg="brand.tertiary" width="100%" type="submit">
+        Submit
+      </Button>
     </form>
   );
 };
