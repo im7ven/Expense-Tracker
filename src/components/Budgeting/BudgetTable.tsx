@@ -5,11 +5,10 @@ import { useBudget } from "../../context/UserBudgetContext";
 export const BudgetTable = () => {
   const { expenses } = useExpense();
   const { budget } = useBudget();
+  const budgetStartDate = budget?.[0]?.startDate;
 
   const budgetExpense = expenses?.filter((expense) => {
-    if (budget !== undefined) {
-      expense.date >= budget[0].startDate;
-    }
+    return budgetStartDate && expense.date >= budgetStartDate;
   });
 
   console.log(budgetExpense);
@@ -25,7 +24,7 @@ export const BudgetTable = () => {
         {budgetExpense?.map((expense) => (
           <Tr>
             <Td>{expense.expenseName}</Td>
-            <Td>{expense.amount}</Td>
+            <Td>${parseInt(expense.amount).toFixed(2)}</Td>
           </Tr>
         ))}
       </Tbody>
