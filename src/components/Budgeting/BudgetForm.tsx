@@ -18,7 +18,7 @@ interface BudgetFormInput {
   amount: string;
 }
 
-export const ExpenseBudgetForm = () => {
+export const BudgetForm = () => {
   const {
     register,
     watch,

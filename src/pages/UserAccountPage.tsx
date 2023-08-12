@@ -11,7 +11,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ExpenseFilter } from "../components/ExpenseFilter";
+import { ExpenseFilter } from "../components/Budgeting/Expense/ExpenseFilter";
 import { ExpenseForm } from "../components/ExpenseForm";
 import { ExpenseList } from "../components/ExpenseList";
 import { ExpensePieChart } from "../components/ExpensePieChart";

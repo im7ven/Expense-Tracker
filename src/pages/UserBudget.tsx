@@ -1,10 +1,10 @@
 import { BudgetTable } from "../components/Budgeting/BudgetTable";
-import { ExpenseBudgetForm } from "../components/Budgeting/ExpenseBudgetForm";
+import { BudgetForm } from "../components/Budgeting/BudgetForm";
 
 export const UserBudget = () => {
   return (
     <div>
-      <ExpenseBudgetForm />
+      <BudgetForm />
       <BudgetTable />
     </div>
   );
