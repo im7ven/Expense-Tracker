@@ -33,11 +33,10 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
     formState: { errors },
   } = useForm<ExpenseFormInputs>();
   const { addExpense } = useExpense();
-  const date = new Date().toDateString();
 
   const onSubmit = async (data: ExpenseFormInputs) => {
     try {
-      await addExpense(data.expenseName, data.category, data.amount, date);
+      await addExpense(data.expenseName, data.category, data.amount, data.date);
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +92,16 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
             placeholder="Enter the amount"
           />
           <FormErrorMessage>{errors.amount?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={!!errors.amount} mb={4}>
+          <FormLabel>Date</FormLabel>
+          <Input
+            type="date"
+            {...register("date", {
+              required: "Date is required.",
+            })}
+          />
+          <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
         </FormControl>
 
         <Button bg="brand.tertiary" width="100%" type="submit">

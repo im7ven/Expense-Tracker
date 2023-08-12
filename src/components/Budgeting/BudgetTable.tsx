@@ -1,6 +1,18 @@
-import { Table, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
+import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { useExpense } from "../../context/ExpenseContext";
+import { useBudget } from "../../context/UserBudgetContext";
 
 export const BudgetTable = () => {
+  const { expenses } = useExpense();
+  const { budget } = useBudget();
+
+  const budgetExpense = expenses?.filter((expense) => {
+    if (budget !== undefined) {
+      expense.date >= budget[0].startDate;
+    }
+  });
+
+  console.log(budgetExpense);
   return (
     <Table>
       <Thead>
@@ -9,7 +21,14 @@ export const BudgetTable = () => {
           <Th>Amount</Th>
         </Tr>
       </Thead>
-      <Tbody></Tbody>
+      <Tbody>
+        {budgetExpense?.map((expense) => (
+          <Tr>
+            <Td>{expense.expenseName}</Td>
+            <Td>{expense.amount}</Td>
+          </Tr>
+        ))}
+      </Tbody>
     </Table>
   );
 };
