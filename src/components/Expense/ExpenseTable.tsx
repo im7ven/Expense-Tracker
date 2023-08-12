@@ -8,7 +8,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useExpense } from "../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 
 export const ExpenseTable = () => {
   const { expenses, dataReceived, handleDeleteExpense, selectedCategory } =

@@ -11,12 +11,12 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ExpenseFilter } from "../components/Budgeting/Expense/ExpenseFilter";
-import { ExpenseForm } from "../components/ExpenseForm";
-import { ExpenseList } from "../components/ExpenseList";
-import { ExpensePieChart } from "../components/ExpensePieChart";
-import { ExpensePlaceholder } from "../components/ExpensePlaceholder";
-import { ExpenseTable } from "../components/ExpenseTable";
+import { ExpenseFilter } from "../components/Expense/ExpenseFilter";
+import { ExpenseForm } from "../components/Expense/ExpenseForm";
+import { ExpenseList } from "../components/Expense/ExpenseList";
+import { ExpensePieChart } from "../components/Expense/ExpensePieChart";
+import { ExpensePlaceholder } from "../components/Expense/ExpensePlaceholder";
+import { ExpenseTable } from "../components/Expense/ExpenseTable";
 import { useExpense } from "../context/ExpenseContext";
 
 export const UserAccountPage = () => {

@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import { useExpense } from "../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend, PieController);
 interface ExpenseObj {

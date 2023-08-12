@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { useExpense } from "../context/ExpenseContext";
-import categories from "./ExpenseCategoryData";
+import { useExpense } from "../../context/ExpenseContext";
+import categories from "../Expense/ExpenseCategoryData";
 
 interface ExpenseFormInputs {
   expenseName: string;

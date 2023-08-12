@@ -7,7 +7,7 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { useExpense } from "../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 
 export const ExpenseList = () => {
   const { expenses, handleDeleteExpense } = useExpense();
