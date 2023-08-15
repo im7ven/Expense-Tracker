@@ -6,7 +6,13 @@ import {
   useState,
 } from "react";
 import { useUserAuth } from "./UserAuthContext";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 
 interface Props {
@@ -23,6 +29,7 @@ interface Budget {
 interface UserBudgetValue {
   addBudget: (startDate: string, endDate: string, amount: string) => void;
   budget?: Budget[];
+  handleRemoveExpense: (budgetId: string) => Promise<void>;
 }
 
 const UserBudgetContext = createContext<UserBudgetValue>({} as UserBudgetValue);
@@ -62,9 +69,21 @@ export const UserBudgetProvider = ({ children }: Props) => {
     }
   }, [user]);
 
+  const handleRemoveExpense = async (budgetId: string) => {
+    try {
+      if (user?.uid) {
+        const budgetRef = doc(db, "users", user?.uid, "budget", budgetId);
+        await deleteDoc(budgetRef);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const userBudgetValue: UserBudgetValue = {
     addBudget,
     budget,
+    handleRemoveExpense,
   };
 
   return (

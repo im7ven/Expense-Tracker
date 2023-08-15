@@ -1,16 +1,17 @@
 import {
   Alert,
+  AlertIcon,
   Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
   HStack,
-  Heading,
   Input,
+  Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useBudget } from "../../context/UserBudgetContext";
-import { useState } from "react";
 
 interface BudgetFormInput {
   startDate: string;
@@ -26,16 +27,13 @@ export const BudgetForm = () => {
     formState: { errors },
   } = useForm<BudgetFormInput>();
 
-  const { addBudget, budget } = useBudget();
+  const { addBudget, budget, handleRemoveExpense } = useBudget();
   const startDate = watch("startDate");
-  const [activeBudget, setActiveBudget] = useState(false);
 
   const onSubmit = (data: BudgetFormInput) => {
     try {
       addBudget(data.startDate, data.endDate, data.amount);
-      setActiveBudget(true);
     } catch (err) {
-      setActiveBudget(false);
       console.log(err);
     }
   };
@@ -49,10 +47,19 @@ export const BudgetForm = () => {
 
   return (
     <>
-      {activeBudget ? (
-        <Alert>
-          Your budget is active, to start a new budget please remove your
-          current budget plan
+      {budget && budget.length > 0 ? (
+        <Alert bg="brand.secondary" status="warning">
+          <AlertIcon />
+          <HStack>
+            <Text>
+              Your budget is active, to start a new budget please remove your
+              current budget plan
+            </Text>
+            <Spacer />
+            <Button onClick={() => handleRemoveExpense(budget?.[0]?.id)}>
+              Remove Budget
+            </Button>
+          </HStack>
         </Alert>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
