@@ -52,8 +52,10 @@ export const BudgetForm = () => {
           <AlertIcon />
           <HStack>
             <Text>
-              Your budget is active, to start a new budget please remove your
-              current budget plan
+              Your budget is currently active. Any expenses added to the expense
+              page will be included in your budget expenses, provided they fall
+              within the specified budget date. If you would like to start a new
+              budget plan, please remove the existing one.
             </Text>
             <Spacer />
             <Button onClick={() => handleRemoveExpense(budget?.[0]?.id)}>
