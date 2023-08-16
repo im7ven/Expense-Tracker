@@ -55,6 +55,13 @@ export const BudgetPlan = () => {
     return (acc += parseInt(expense.amount));
   }, 0);
 
+  const handleProgressColor =
+    budgetExpenseTotal &&
+    budgetAmount &&
+    parseInt(budgetAmount) < budgetExpenseTotal
+      ? "red.500"
+      : "green.500";
+
   return (
     <>
       <Box textAlign="center">
@@ -84,17 +91,7 @@ export const BudgetPlan = () => {
         </div>
       </Flex>
       <Center>
-        <CircularProgress
-          size="250px"
-          value={40}
-          color={
-            budgetExpenseTotal &&
-            budgetAmount &&
-            parseInt(budgetAmount) >= budgetExpenseTotal
-              ? "green.500"
-              : "red.500"
-          }
-        >
+        <CircularProgress size="250px" value={40} color={handleProgressColor}>
           <CircularProgressLabel fontSize="xl">
             <Stack>
               <Text>Expense Total :</Text>
