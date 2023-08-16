@@ -43,7 +43,12 @@ export const BudgetPlan = () => {
   // console.log("Progress value", progress.toFixed(2));
 
   const budgetExpenses = expenses?.filter((expense) => {
-    return budgetStartDate && expense.date >= budgetStartDate;
+    return (
+      budgetStartDate &&
+      budgetEndDate &&
+      expense.date >= budgetStartDate &&
+      expense.date <= budgetEndDate
+    );
   });
 
   const budgetExpenseTotal = budgetExpenses?.reduce((acc, expense) => {
