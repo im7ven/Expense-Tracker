@@ -1,24 +1,39 @@
 import {
   Alert,
-  AlertIcon,
   AlertDescription,
+  AlertIcon,
   AlertTitle,
+  CloseButton,
+  HStack,
 } from "@chakra-ui/react";
 
-export const ActiveBudgetAlert = () => {
+interface Props {
+  onClose: () => void;
+}
+
+export const ActiveBudgetAlert = ({ onClose }: Props) => {
   return (
     <Alert
+      pb={5}
       bg="brand.secondaryBg"
       status="success"
       textAlign="center"
       flexDirection="column"
     >
-      <AlertIcon boxSize="30px" color="brand.tertiary" />
-      <AlertTitle color="brand.text">Your Budget Plan is Active</AlertTitle>
+      <CloseButton
+        size={{ base: "md", md: "lg" }}
+        alignSelf="end"
+        onClick={() => onClose()}
+      />
+      <HStack mb={1} spacing="0px">
+        <AlertIcon boxSize="30px" color="brand.tertiary" />
+        <AlertTitle color="brand.text">Your Budget Plan is Active</AlertTitle>
+      </HStack>
       <AlertDescription maxWidth="3xl">
-        Any expenses added to the expense page will be included in your budget
-        expenses, provided they fall within the specified budget dates. If you
-        would like to start a new budget plan, please remove the existing one.
+        <strong>Note:</strong> Your budget expenses will reflect any expenses
+        added to the expense page, provided they fall within the specified
+        budget dates. If you would like to start a new budget plan, please
+        remove the existing one.
       </AlertDescription>
     </Alert>
   );
