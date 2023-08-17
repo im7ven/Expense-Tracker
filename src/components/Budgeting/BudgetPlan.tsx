@@ -5,62 +5,23 @@ import {
   CircularProgressLabel,
   Divider,
   Flex,
-  Heading,
+  Progress,
   Stack,
   Stat,
   StatLabel,
   StatNumber,
   Text,
 } from "@chakra-ui/react";
-// import { differenceInMilliseconds, startOfDay } from "date-fns";
-import { useExpense } from "../../context/ExpenseContext";
 import { useBudget } from "../../context/UserBudgetContext";
+import { useBudgetProgress } from "../../context/BudgetPeriodContext";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();
-  const { expenses } = useExpense();
+  const { budgetDateProgress, budgetExpenseTotal } = useBudgetProgress();
 
   const budgetStartDate = budget?.[0]?.startDate;
   const budgetEndDate = budget?.[0]?.endDate;
   const budgetAmount = budget?.[0]?.amount;
-
-  // let progress = 0;
-
-  // // ...
-
-  // if (budgetStartDate && budgetEndDate) {
-  //   const startDate = startOfDay(new Date(budgetStartDate)); // Convert to start of day in UTC
-  //   const endDate = startOfDay(new Date(budgetEndDate)); // Convert to start of day in UTC
-  //   const currentDate = new Date(); // Convert to start of day in UTC
-
-  //   if (currentDate >= startDate) {
-  //     const totalMillis = differenceInMilliseconds(endDate, startDate);
-  //     const elapsedMillis = differenceInMilliseconds(currentDate, startDate);
-
-  //     progress = (elapsedMillis / totalMillis) * 100;
-  //   }
-  // }
-  // console.log("Progress value", progress.toFixed(2));
-
-  const budgetExpenses = expenses?.filter((expense) => {
-    return (
-      budgetStartDate &&
-      budgetEndDate &&
-      expense.date >= budgetStartDate &&
-      expense.date <= budgetEndDate
-    );
-  });
-
-  const budgetExpenseTotal = budgetExpenses?.reduce((acc, expense) => {
-    return (acc += parseInt(expense.amount));
-  }, 0);
-
-  const handleProgressColor =
-    budgetExpenseTotal &&
-    budgetAmount &&
-    parseInt(budgetAmount) < budgetExpenseTotal
-      ? "red.500"
-      : "green.500";
 
   return (
     <>
@@ -82,20 +43,30 @@ export const BudgetPlan = () => {
           </Text>
           <Text fontSize="xl">{budgetStartDate}</Text>
         </Box>
+        <Box width="80%" padding={3}>
+          <Text textAlign="center">Days Elapsed</Text>
+          <Progress value={budgetDateProgress} borderRadius={5} />
+        </Box>
 
-        <div>
+        <Box>
           <Text color="brand.text" fontWeight="bold">
             End Date
           </Text>
           <Text fontSize="xl">{budgetEndDate}</Text>
-        </div>
+        </Box>
       </Flex>
       <Center>
-        <CircularProgress size="250px" value={40} color={handleProgressColor}>
+        <CircularProgress
+          size="250px"
+          // value={handleBudgetProgress()}
+          // color={handleProgressColor}
+        >
           <CircularProgressLabel fontSize="xl">
             <Stack>
               <Text>Expense Total :</Text>
-              <Text>${budgetExpenseTotal?.toFixed(2)}</Text>
+              <Text fontWeight="bold" fontSize="2xl">
+                ${budgetExpenseTotal?.toFixed(2)}
+              </Text>
             </Stack>
           </CircularProgressLabel>
         </CircularProgress>

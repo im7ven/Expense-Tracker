@@ -19,7 +19,7 @@ interface Props {
   children: ReactNode;
 }
 
-interface Expense {
+export interface Expense {
   id: string;
   expenseName: string;
   category: string;
