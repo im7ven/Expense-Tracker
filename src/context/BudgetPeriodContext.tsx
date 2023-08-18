@@ -17,6 +17,7 @@ interface BudgetPeriodContextValue {
   budgetDateProgress: number;
   budgetExpenses?: Expense[];
   budgetExpenseTotal?: number;
+  expenseProgress?: number;
 }
 
 const BudgetPeriodContext = createContext<BudgetPeriodContextValue>(
@@ -31,6 +32,7 @@ export const BudgetPeriodProvider = ({ children }: Props) => {
   const [budgetExpenseTotal, setBudgetExpenseTotal] = useState<
     number | undefined
   >(0);
+  const [expenseProgress, setExpenseProgress] = useState<number>(0);
 
   useEffect(() => {
     const budgetStartDate = budget?.[0]?.startDate;
@@ -60,7 +62,6 @@ export const BudgetPeriodProvider = ({ children }: Props) => {
       const elapsedMillis = differenceInMilliseconds(currentDate, startDate);
 
       dateProgress = (elapsedMillis / totalMillis) * 100;
-      dateProgress = Math.min(dateProgress, 100);
       setBudgetDateProgress(dateProgress);
     }
 
@@ -78,12 +79,19 @@ export const BudgetPeriodProvider = ({ children }: Props) => {
       return (acc += parseInt(expense.amount));
     }, 0);
     setBudgetExpenseTotal(newBudgetExpenseTotal);
-  }, [budget, expenses]);
+
+    if (budgetExpenseTotal && budgetAmount) {
+      const newExpenseProgress =
+        (budgetExpenseTotal / parseInt(budgetAmount)) * 100;
+      setExpenseProgress(newExpenseProgress);
+    }
+  }, [budget, expenses, budgetExpenseTotal]);
 
   const budgetPeriodContextValue: BudgetPeriodContextValue = {
     budgetDateProgress,
     budgetExpenses,
     budgetExpenseTotal,
+    expenseProgress,
   };
   return (
     <BudgetPeriodContext.Provider value={budgetPeriodContextValue}>

@@ -9,6 +9,7 @@ import { ExpenseContextProvider } from "./context/ExpenseContext";
 import { UserBudget } from "./pages/UserBudget";
 import { UserBudgetProvider } from "./context/UserBudgetContext";
 import { BudgetPeriodProvider } from "./context/BudgetPeriodContext";
+import { BudgetFeedbackProvider } from "./context/BudgetFeedbackContext";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
         <ExpenseContextProvider>
           <UserBudgetProvider>
             <BudgetPeriodProvider>
-              <PrivateRoutes />
+              <BudgetFeedbackProvider>
+                <PrivateRoutes />
+              </BudgetFeedbackProvider>
             </BudgetPeriodProvider>
           </UserBudgetProvider>
         </ExpenseContextProvider>
