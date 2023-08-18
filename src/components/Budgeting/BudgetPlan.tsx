@@ -14,10 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { useBudget } from "../../context/UserBudgetContext";
 import { useBudgetProgress } from "../../context/BudgetPeriodContext";
+import { BudgetExpenseProgress } from "./BudgetExpenseProgress";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();
-  const { budgetDateProgress, budgetExpenseTotal } = useBudgetProgress();
+  const { budgetDateProgress } = useBudgetProgress();
 
   const budgetStartDate = budget?.[0]?.startDate;
   const budgetEndDate = budget?.[0]?.endDate;
@@ -56,20 +57,7 @@ export const BudgetPlan = () => {
         </Box>
       </Flex>
       <Center>
-        <CircularProgress
-          size="250px"
-          // value={handleBudgetProgress()}
-          // color={handleProgressColor}
-        >
-          <CircularProgressLabel fontSize="xl">
-            <Stack>
-              <Text>Expense Total :</Text>
-              <Text fontWeight="bold" fontSize="2xl">
-                ${budgetExpenseTotal?.toFixed(2)}
-              </Text>
-            </Stack>
-          </CircularProgressLabel>
-        </CircularProgress>
+        <BudgetExpenseProgress />
       </Center>
     </>
   );
