@@ -1,10 +1,14 @@
 import { Box, Heading } from "@chakra-ui/react";
 
-export const ExpensePlaceholder = () => {
+interface Props {
+  children: string;
+}
+
+export const ExpensePlaceholder = ({ children }: Props) => {
   return (
     <Box padding={3} border="1px solid white" borderRadius={15} minH="400px">
       <Heading size="md" color="brand.secondary">
-        You have no current expenses...
+        {children}
       </Heading>
     </Box>
   );

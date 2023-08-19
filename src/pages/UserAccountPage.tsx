@@ -58,7 +58,11 @@ export const UserAccountPage = () => {
             </Stat>
           </Box>
         </Flex>
-        {expenses?.length === 0 ? <ExpensePlaceholder /> : expenseDataRender}
+        {expenses?.length === 0 ? (
+          <ExpensePlaceholder children="You have no current expense..." />
+        ) : (
+          expenseDataRender
+        )}
       </Box>
 
       <ExpensePieChart />
