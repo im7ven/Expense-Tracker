@@ -1,7 +1,6 @@
 import { BudgetTable } from "../components/Budgeting/BudgetTable";
 import { BudgetForm } from "../components/Budgeting/BudgetForm";
 import { BudgetPlan } from "../components/Budgeting/BudgetPlan";
-import { BudgetRemoveModal } from "../components/Budgeting/BudgetRemoveModal";
 import { useBudget } from "../context/UserBudgetContext";
 import { ActiveBudgetAlert } from "../components/Budgeting/ActiveBudgetAlert";
 import { useEffect, useState } from "react";
@@ -22,9 +21,10 @@ export const UserBudget = () => {
   const showAlert = () => {
     setShowBudgetAlert(true);
   };
+
   useEffect(() => {
     if (budgetExpenses) {
-      budgetExpenses?.length > 0
+      budgetExpenses.length > 0
         ? setActiveBudgetExpense(true)
         : setActiveBudgetExpense(false);
     }
@@ -34,26 +34,26 @@ export const UserBudget = () => {
     <>
       {budget && budget.length > 0 ? (
         showBudgetAlert && (
-          <ActiveBudgetAlert onClose={handleExpenseAlertVisibility} />
+          <>
+            <ActiveBudgetAlert onClose={handleExpenseAlertVisibility} />
+            <Box px={3} mt={8}>
+              <SimpleGrid spacing="40px" columns={{ base: 1, lg: 2 }}>
+                <GridItem>
+                  {!activeBudgetExpenses ? (
+                    <ExpensePlaceholder children="You have no current budget expenses..." />
+                  ) : (
+                    <BudgetTable />
+                  )}
+                </GridItem>
+                <GridItem>
+                  <BudgetPlan />
+                </GridItem>
+              </SimpleGrid>
+            </Box>
+          </>
         )
       ) : (
         <BudgetForm showActiveBudgetAlert={showAlert} />
-      )}
-      {!activeBudgetExpenses ? (
-        <Box mt={3} px={3}>
-          <ExpensePlaceholder children="You have no current budget expenses..." />
-        </Box>
-      ) : (
-        <Box px={3} mt={8}>
-          <SimpleGrid spacing="40px" columns={{ base: 1, lg: 2 }}>
-            <GridItem>
-              <BudgetTable />
-            </GridItem>
-            <GridItem>
-              <BudgetPlan />
-            </GridItem>
-          </SimpleGrid>
-        </Box>
       )}
     </>
   );

@@ -21,7 +21,7 @@ import { BudgetRemoveModal } from "./BudgetRemoveModal";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();
-  const { budgetDateProgress } = useBudgetProgress();
+  const { budgetDateProgress, budgetExpenses } = useBudgetProgress();
   const { showSuggestion } = useBudgetFeedback();
 
   const budgetStartDate = budget?.[0]?.startDate;
@@ -61,10 +61,14 @@ export const BudgetPlan = () => {
           <Text fontSize="xl">{budgetEndDate}</Text>
         </Box>
       </Flex>
-      <Box my={3}>{showSuggestion && <SuggestionAlert />}</Box>
-      <Center mb={4}>
-        <BudgetExpenseProgress />
-      </Center>
+      {budgetExpenses && budgetExpenses?.length > 0 ? (
+        <>
+          <Box my={3}>{showSuggestion && <SuggestionAlert />}</Box>
+          <Center mb={4}>
+            <BudgetExpenseProgress />
+          </Center>{" "}
+        </>
+      ) : null}
       <BudgetRemoveModal />
     </>
   );
