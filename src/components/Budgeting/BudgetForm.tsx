@@ -1,8 +1,10 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -46,7 +48,10 @@ export const BudgetForm = ({ showActiveBudgetAlert }: Props) => {
   };
 
   return (
-    <>
+    <Box mx="auto" maxWidth="3xl" padding={3}>
+      <Heading mb={3} size="lg">
+        Create a Budget Plan
+      </Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl mb={3} isInvalid={!!errors.startDate}>
           <FormLabel>Start date</FormLabel>
@@ -87,6 +92,6 @@ export const BudgetForm = ({ showActiveBudgetAlert }: Props) => {
           Submit
         </Button>
       </form>
-    </>
+    </Box>
   );
 };
