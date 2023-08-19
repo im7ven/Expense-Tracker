@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { Button, HStack, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -17,15 +17,15 @@ export const NavList = () => {
 
   return (
     <HStack spacing={5}>
-      <Text fontSize="lg">
-        <Link to="/useraccount">Home</Link>
+      <Text fontSize="xl">
+        <Link to="/useraccount">Expense</Link>
       </Text>
-      <Text fontSize="lg">
+      <Text fontSize="xl">
         <Link to="/userbudget">Budget</Link>
       </Text>
-      <Text cursor="pointer" fontSize="lg" onClick={handleLogout}>
+      <Button cursor="pointer" onClick={handleLogout}>
         Logout
-      </Text>
+      </Button>
     </HStack>
   );
 };

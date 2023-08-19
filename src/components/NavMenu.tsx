@@ -6,6 +6,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
+import { IoMenu } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -24,16 +25,24 @@ export const NavMenu = () => {
 
   return (
     <Menu>
-      <MenuButton as={Button}></MenuButton>
-      <MenuList>
-        <MenuItem>
-          <Link to="useraccount">Home</Link>
+      <MenuButton as={Button}>
+        <IoMenu />
+      </MenuButton>
+      <MenuList bg="brand.secondaryBg">
+        <MenuItem mb={1} bg="brand.secondary">
+          <Text fontWeight="semibold">
+            <Link to="useraccount">Expense</Link>
+          </Text>
         </MenuItem>
-        <MenuItem>
-          <Link to="userbudget">Budgeting</Link>
+        <MenuItem mb={1} bg="brand.secondary">
+          <Text fontWeight="semibold">
+            <Link to="userbudget">Budgeting</Link>
+          </Text>
         </MenuItem>
-        <MenuItem>
-          <Text onClick={handleLogout}>Logout</Text>
+        <MenuItem bg="brand.primary">
+          <Text fontWeight="semibold" onClick={handleLogout}>
+            Logout
+          </Text>
         </MenuItem>
       </MenuList>
     </Menu>
