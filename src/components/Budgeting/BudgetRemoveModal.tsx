@@ -26,7 +26,9 @@ export const BudgetRemoveModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Discard</Button>
+      <Button width="100%" onClick={onOpen}>
+        Remove Budget Plan
+      </Button>
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}

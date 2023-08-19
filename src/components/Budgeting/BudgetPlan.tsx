@@ -17,6 +17,7 @@ import { useBudgetProgress } from "../../context/BudgetPeriodContext";
 import { BudgetExpenseProgress } from "./BudgetExpenseProgress";
 import { SuggestionAlert } from "./SuggestionAlert";
 import { useBudgetFeedback } from "../../context/BudgetFeedbackContext";
+import { BudgetRemoveModal } from "./BudgetRemoveModal";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();
@@ -39,7 +40,6 @@ export const BudgetPlan = () => {
           </StatNumber>
         </Stat>
       </Box>
-      <Divider />
       <Flex justify={"space-evenly"}>
         <Box>
           <Text color="brand.text" fontWeight="bold">
@@ -48,7 +48,9 @@ export const BudgetPlan = () => {
           <Text fontSize="xl">{budgetStartDate}</Text>
         </Box>
         <Box width="80%" padding={3}>
-          <Text textAlign="center">Days Elapsed</Text>
+          <Text fontWeight="semibold" textAlign="center">
+            Days Elapsed
+          </Text>
           <Progress value={budgetDateProgress} borderRadius={5} />
         </Box>
 
@@ -59,10 +61,11 @@ export const BudgetPlan = () => {
           <Text fontSize="xl">{budgetEndDate}</Text>
         </Box>
       </Flex>
-      {showSuggestion && <SuggestionAlert />}
-      <Center>
+      <Box my={3}>{showSuggestion && <SuggestionAlert />}</Box>
+      <Center mb={4}>
         <BudgetExpenseProgress />
       </Center>
+      <BudgetRemoveModal />
     </>
   );
 };

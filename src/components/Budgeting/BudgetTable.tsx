@@ -1,4 +1,4 @@
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Heading, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useExpense } from "../../context/ExpenseContext";
 import { useBudget } from "../../context/UserBudgetContext";
 
@@ -13,21 +13,26 @@ export const BudgetTable = () => {
 
   console.log(budgetExpense);
   return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th>Expense</Th>
-          <Th>Amount</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {budgetExpense?.map((expense) => (
+    <>
+      <Heading mb={3} size="md">
+        Budget Expenses
+      </Heading>
+      <Table bg="brand.secondaryBg" borderTopRadius="10px">
+        <Thead>
           <Tr>
-            <Td>{expense.expenseName}</Td>
-            <Td>${parseInt(expense.amount).toFixed(2)}</Td>
+            <Th>Expense</Th>
+            <Th>Amount</Th>
           </Tr>
-        ))}
-      </Tbody>
-    </Table>
+        </Thead>
+        <Tbody>
+          {budgetExpense?.map((expense) => (
+            <Tr>
+              <Td>{expense.expenseName}</Td>
+              <Td>${parseInt(expense.amount).toFixed(2)}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </>
   );
 };

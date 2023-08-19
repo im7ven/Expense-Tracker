@@ -5,6 +5,7 @@ import { BudgetRemoveModal } from "../components/Budgeting/BudgetRemoveModal";
 import { useBudget } from "../context/UserBudgetContext";
 import { ActiveBudgetAlert } from "../components/Budgeting/ActiveBudgetAlert";
 import { useState } from "react";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 
 export const UserBudget = () => {
   const { budget } = useBudget();
@@ -19,7 +20,7 @@ export const UserBudget = () => {
   };
 
   return (
-    <div>
+    <>
       {budget && budget.length > 0 ? (
         showBudgetAlert && (
           <ActiveBudgetAlert onClose={handleExpenseAlertVisibility} />
@@ -27,9 +28,16 @@ export const UserBudget = () => {
       ) : (
         <BudgetForm showActiveBudgetAlert={showAlert} />
       )}
-      <BudgetTable />
-      <BudgetPlan />
-      <BudgetRemoveModal />
-    </div>
+      <Box px={3} mt={8}>
+        <SimpleGrid spacing="40px" columns={{ base: 1, lg: 2 }}>
+          <GridItem>
+            <BudgetTable />
+          </GridItem>
+          <GridItem>
+            <BudgetPlan />
+          </GridItem>
+        </SimpleGrid>
+      </Box>
+    </>
   );
 };
