@@ -10,17 +10,13 @@ import {
 import { useForm } from "react-hook-form";
 import { useBudget } from "../../context/UserBudgetContext";
 
-interface Props {
-  showActiveBudgetAlert: () => void;
-}
-
 interface BudgetFormInput {
   startDate: string;
   endDate: string;
   amount: string;
 }
 
-export const BudgetForm = ({ showActiveBudgetAlert }: Props) => {
+export const BudgetForm = () => {
   const {
     register,
     watch,
@@ -34,7 +30,6 @@ export const BudgetForm = ({ showActiveBudgetAlert }: Props) => {
   const onSubmit = (data: BudgetFormInput) => {
     try {
       addBudget(data.startDate, data.endDate, data.amount);
-      showActiveBudgetAlert();
     } catch (err) {
       console.log(err);
     }

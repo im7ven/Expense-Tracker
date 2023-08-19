@@ -7,24 +7,15 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-interface Props {
-  onClose: () => void;
-}
-
-export const ActiveBudgetAlert = ({ onClose }: Props) => {
+export const ActiveBudgetAlert = () => {
   return (
     <Alert
-      pb={5}
+      py={4}
       bg="brand.secondaryBg"
       status="success"
       textAlign="center"
       flexDirection="column"
     >
-      <CloseButton
-        size={{ base: "md", md: "lg" }}
-        alignSelf="end"
-        onClick={() => onClose()}
-      />
       <HStack mb={1} spacing="0px">
         <AlertIcon boxSize="30px" color="brand.tertiary" />
         <AlertTitle color="brand.text">Your Budget Plan is Active</AlertTitle>
