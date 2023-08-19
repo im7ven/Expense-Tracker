@@ -15,10 +15,13 @@ import {
 import { useBudget } from "../../context/UserBudgetContext";
 import { useBudgetProgress } from "../../context/BudgetPeriodContext";
 import { BudgetExpenseProgress } from "./BudgetExpenseProgress";
+import { SuggestionAlert } from "./SuggestionAlert";
+import { useBudgetFeedback } from "../../context/BudgetFeedbackContext";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();
   const { budgetDateProgress } = useBudgetProgress();
+  const { showSuggestion } = useBudgetFeedback();
 
   const budgetStartDate = budget?.[0]?.startDate;
   const budgetEndDate = budget?.[0]?.endDate;
@@ -56,6 +59,7 @@ export const BudgetPlan = () => {
           <Text fontSize="xl">{budgetEndDate}</Text>
         </Box>
       </Flex>
+      {showSuggestion && <SuggestionAlert />}
       <Center>
         <BudgetExpenseProgress />
       </Center>
