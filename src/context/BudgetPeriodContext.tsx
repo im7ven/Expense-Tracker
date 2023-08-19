@@ -80,9 +80,9 @@ export const BudgetPeriodProvider = ({ children }: Props) => {
     }, 0);
     setBudgetExpenseTotal(newBudgetExpenseTotal);
 
-    if (budgetExpenseTotal && budgetAmount) {
+    if (newBudgetExpenseTotal && budgetAmount) {
       const newExpenseProgress =
-        (budgetExpenseTotal / parseInt(budgetAmount)) * 100;
+        (newBudgetExpenseTotal / parseInt(budgetAmount)) * 100;
       setExpenseProgress(newExpenseProgress);
     }
   }, [budget, expenses, budgetExpenseTotal]);

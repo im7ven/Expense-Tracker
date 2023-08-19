@@ -13,13 +13,13 @@ import { useRef } from "react";
 import { useBudget } from "../../context/UserBudgetContext";
 
 export const BudgetRemoveModal = () => {
-  const { handleRemoveExpense, budget } = useBudget();
+  const { handleRemoveBudget, budget } = useBudget();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
 
   const onBudgetDelete = () => {
     if (budget) {
-      handleRemoveExpense(budget?.[0]?.id);
+      handleRemoveBudget(budget?.[0]?.id);
       onClose();
     }
   };

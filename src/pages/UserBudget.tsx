@@ -7,12 +7,25 @@ import { useEffect, useState } from "react";
 import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { ExpensePlaceholder } from "../components/Expense/ExpensePlaceholder";
 import { useBudgetProgress } from "../context/BudgetPeriodContext";
+import { BudgetEndModal } from "../components/Budgeting/BudgetEndModal";
 
 export const UserBudget = () => {
-  const { budget } = useBudget();
-  const { budgetExpenses } = useBudgetProgress();
+  const { budget, handleRemoveBudget } = useBudget();
+  const { budgetExpenses, budgetDateProgress } = useBudgetProgress();
   const [showBudgetAlert, setShowBudgetAlert] = useState(true);
   const [activeBudgetExpenses, setActiveBudgetExpense] = useState(false);
+  const [isBudgetEnded, setIsBudgetEnded] = useState(false);
+
+  useEffect(() => {
+    budget?.length === 1 && budgetDateProgress >= 100 && setIsBudgetEnded(true);
+  }, [budgetDateProgress]);
+
+  const handleBudgetEnd = () => {
+    if (budget) {
+      handleRemoveBudget(budget?.[0]?.id);
+      setIsBudgetEnded(false);
+    }
+  };
 
   const handleExpenseAlertVisibility = () => {
     setShowBudgetAlert(false);
@@ -32,6 +45,7 @@ export const UserBudget = () => {
 
   return (
     <>
+      <BudgetEndModal isOpen={isBudgetEnded} onClose={handleBudgetEnd} />
       {budget && budget.length > 0 ? (
         showBudgetAlert && (
           <>

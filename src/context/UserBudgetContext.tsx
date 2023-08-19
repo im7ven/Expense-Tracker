@@ -29,7 +29,7 @@ interface Budget {
 interface UserBudgetValue {
   addBudget: (startDate: string, endDate: string, amount: string) => void;
   budget?: Budget[];
-  handleRemoveExpense: (budgetId: string) => Promise<void>;
+  handleRemoveBudget: (budgetId: string) => Promise<void>;
 }
 
 const UserBudgetContext = createContext<UserBudgetValue>({} as UserBudgetValue);
@@ -69,7 +69,7 @@ export const UserBudgetProvider = ({ children }: Props) => {
     }
   }, [user]);
 
-  const handleRemoveExpense = async (budgetId: string) => {
+  const handleRemoveBudget = async (budgetId: string) => {
     try {
       if (user?.uid) {
         const budgetRef = doc(db, "users", user?.uid, "budget", budgetId);
@@ -83,7 +83,7 @@ export const UserBudgetProvider = ({ children }: Props) => {
   const userBudgetValue: UserBudgetValue = {
     addBudget,
     budget,
-    handleRemoveExpense,
+    handleRemoveBudget,
   };
 
   return (
