@@ -1,6 +1,7 @@
 import {
   CloseButton,
   Divider,
+  Flex,
   HStack,
   Heading,
   List,
@@ -23,38 +24,32 @@ export const ExpenseList = () => {
   return (
     <>
       <List
-        padding={["5px", "2px"]}
+        padding="5px"
         bg="brand.secondaryBg"
         borderTopRadius="10px"
         spacing={3}
       >
         <ListItem>
-          <HStack>
+          <Flex py={3} width="100%" justify="space-between">
             {expenseHeadings.map((item) => (
               <>
                 <Heading color="brand.text" size="xs" key={item}>
                   {item}
                 </Heading>
-                <Spacer />
+                {/* <Spacer /> */}
               </>
             ))}
-          </HStack>
+          </Flex>
         </ListItem>
         {expenses?.map((expense) => (
-          <ListItem key={expense.id}>
+          <ListItem py={2} key={expense.id}>
             <Divider />
             <HStack>
-              <Text textAlign="center" color="#fff">
-                {expense.expenseName}
-              </Text>
+              <Text>{expense.expenseName}</Text>
               <Spacer />
-              <Text textAlign="center" color="#fff">
-                {expense.category}
-              </Text>
+              <Text>{expense.category}</Text>
               <Spacer />
-              <Text textAlign="center" color="#fff">
-                {expense.amount}
-              </Text>
+              <Text>{expense.amount}</Text>
 
               <CloseButton
                 ml={1}

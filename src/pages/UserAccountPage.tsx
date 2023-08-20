@@ -33,7 +33,7 @@ export const UserAccountPage = () => {
 
   const expenseDataRender = useBreakpointValue({
     base: <ExpenseList />,
-    sm: <ExpenseTable />,
+    md: <ExpenseTable />,
   });
 
   const totalExpenseAmount = expenses
