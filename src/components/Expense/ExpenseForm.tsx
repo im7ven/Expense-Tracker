@@ -62,6 +62,7 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
           <Input
             {...register("expenseName", {
               required: "Expense is required.",
+              maxLength: { value: 16, message: "Maximum of 16 characters." },
             })}
             placeholder="Enter an expense"
           />
@@ -86,8 +87,10 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
         <FormControl isInvalid={!!errors.amount} mb={4}>
           <FormLabel>Amount</FormLabel>
           <Input
+            type="number"
             {...register("amount", {
               required: "Amount is required.",
+              max: { value: 9999, message: "Maximum amount of 9999" },
             })}
             placeholder="Enter the amount"
           />
