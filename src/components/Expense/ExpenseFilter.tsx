@@ -1,9 +1,19 @@
 import { Box, Select } from "@chakra-ui/react";
-import { useExpense } from "../../context/ExpenseContext";
+import { Expense, useExpense } from "../../context/ExpenseContext";
 
 export const ExpenseFilter = () => {
   const { expenses, handleSelectedCategory, selectedCategory } = useExpense();
 
+  const uniqueCategories = new Set();
+
+  const filteredExpenses = expenses?.filter((expense) => {
+    if (uniqueCategories.has(expense.category)) {
+      return false;
+    } else {
+      uniqueCategories.add(expense.category);
+      return true;
+    }
+  });
   return (
     <Box display="inline-block">
       <Select
@@ -14,7 +24,7 @@ export const ExpenseFilter = () => {
         value={selectedCategory}
         onChange={(e) => handleSelectedCategory(e.target.value)}
       >
-        {expenses?.map((expense) => (
+        {filteredExpenses?.map((expense) => (
           <option key={expense.id} value={expense.category}>
             {expense.category}
           </option>
