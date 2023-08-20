@@ -26,11 +26,9 @@ export const ExpenseList = () => {
         <ListItem>
           <Flex py={3} width="100%" justify="space-between">
             {expenseHeadings.map((item) => (
-              <>
-                <Heading color="brand.text" size="xs" key={item}>
-                  {item}
-                </Heading>
-              </>
+              <Heading color="brand.text" size="xs" key={item}>
+                {item}
+              </Heading>
             ))}
           </Flex>
         </ListItem>

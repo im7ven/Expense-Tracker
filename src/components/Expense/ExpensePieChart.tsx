@@ -30,8 +30,6 @@ export const ExpensePieChart = () => {
       expenseObj.push({ category: e.category, amount: parseFloat(e.amount) });
     }
   });
-  console.log(expenseObj);
-  console.log(expenses);
 
   const data = {
     labels: expenseObj.map((expense) => expense.category),
