@@ -6,9 +6,14 @@ import {
   Container,
   FormControl,
   FormLabel,
+  Heading,
   Input,
+  SimpleGrid,
   Text,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
+import primaryBackground from "../images/FormBg.webp";
 import { FirebaseError } from "firebase/app";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,67 +58,100 @@ export const Auth = ({ isLogin }: Props) => {
       minHeight="100vh"
       px={4}
     >
-      <Container bg="brand.secondaryBg" borderRadius={10} px={0} pt={8}>
-        <Badge
-          className="greeting-badge"
-          bg="brand.primary"
-          py={5}
-          px={5}
-          borderRadius={{ tl: 0, tr: "lg", bl: 0, br: "lg" }}
+      <SimpleGrid
+        borderRadius={10}
+        overflow="hidden"
+        bg="brand.secondaryBg"
+        width="100%"
+        maxWidth="3xl"
+        spacing={5}
+        columns={{ base: 1, md: 2 }}
+      >
+        <Flex
+          height={{ base: "80px", md: "initial" }}
+          bgPosition="center"
+          justify="center"
+          bgSize="cover"
+          bgImage={primaryBackground}
+          alignItems="center"
         >
-          {isLogin ? "Welcome Back" : "Create an account to get started"}
-        </Badge>
-        <form onSubmit={handleLogin}>
-          <FormControl padding={7}>
-            {!isLogin && (
-              <>
-                <FormLabel htmlFor="name">Name</FormLabel>
-                <Input
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                  mb={6}
-                  type="name"
-                  id="name"
-                  placeholder="Enter your name"
-                />
-              </>
-            )}
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              mb={4}
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-            />
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              variant="outline"
-              type="password"
-              id="password"
-              placeholder="Enter your email"
-            />
-            <Center mt={5}>
-              <Button width="100%" type="submit">
-                {isLogin ? "Login" : "Sign Up"}
-              </Button>
-            </Center>
-            {isLogin ? (
-              <Text mt={5} textAlign="center">
-                Need an account?<Link to={"/signup"}> Sign Up</Link>
-              </Text>
-            ) : (
-              <Text mt={5} textAlign="center">
-                Already have an account? <Link to={"/login"}>Login</Link>
-              </Text>
-            )}
-            <Center>{error !== "" && <Text color="red">{error}</Text>}</Center>
-          </FormControl>
-        </form>
-      </Container>
+          <Heading color="#355" alignSelf="center" textAlign="center" size="lg">
+            Money Management Made Easier
+          </Heading>
+        </Flex>
+        <Container borderRadius={10} px={0} pt={8}>
+          <Badge
+            className="greeting-badge"
+            bg="brand.primary"
+            py={5}
+            px={5}
+            borderRadius={{ tl: 0, tr: "lg", bl: 0, br: "lg" }}
+          >
+            {isLogin ? "Welcome Back" : "Create an account to get started"}
+          </Badge>
+          <form onSubmit={handleLogin}>
+            <FormControl padding={7}>
+              {!isLogin && (
+                <>
+                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <Input
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    mb={6}
+                    type="name"
+                    id="name"
+                    placeholder="Enter your name"
+                  />
+                </>
+              )}
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                mb={4}
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+              />
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <Input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                variant="outline"
+                type="password"
+                id="password"
+                placeholder="Enter your email"
+              />
+              <Center mt={5}>
+                <Button width="100%" type="submit">
+                  {isLogin ? "Login" : "Sign Up"}
+                </Button>
+              </Center>
+              {isLogin ? (
+                <Text mt={5} textAlign="center">
+                  Need an account?
+                  <Link className="highlight-link" to={"/signup"}>
+                    {" "}
+                    Sign Up
+                  </Link>
+                </Text>
+              ) : (
+                <Text mt={5} textAlign="center">
+                  Already have an account?
+                  <Text>
+                    <Link className="highlight-link" to={"/login"}>
+                      Login
+                    </Link>
+                  </Text>
+                </Text>
+              )}
+              <Center>
+                {error !== "" && <Text color="red">{error}</Text>}
+              </Center>
+            </FormControl>
+          </form>
+        </Container>
+      </SimpleGrid>
     </Box>
   );
 };

@@ -2,3 +2,7 @@
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
 }
+
+.highlight-link {
+  font-weight: bold;
+}
