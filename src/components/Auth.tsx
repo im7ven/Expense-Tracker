@@ -4,6 +4,7 @@ import {
   Button,
   Center,
   Container,
+  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -13,9 +14,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FirebaseError } from "firebase/app";
+import GoogleButton from "react-google-button";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../config/firebase";
 import { useUserAuth } from "../context/UserAuthContext";
 import primaryBackground from "../images/FormBg.webp";
 
@@ -27,7 +28,7 @@ export const Auth = ({ isLogin }: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn, signUp } = useUserAuth();
+  const { signIn, signUp, googleSignIn } = useUserAuth();
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -38,10 +39,8 @@ export const Auth = ({ isLogin }: Props) => {
       if (isLogin) {
         await signIn(email, password);
         navigate("/useraccount");
-        console.log("this is test2", auth.currentUser);
       } else {
         await signUp(email, password, name);
-        console.log(auth.currentUser);
         navigate("/useraccount");
       }
     } catch (err: unknown) {
@@ -49,6 +48,11 @@ export const Auth = ({ isLogin }: Props) => {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    googleSignIn();
+  };
+
+  console.log("Current");
   return (
     <Box
       display="flex"
@@ -144,6 +148,11 @@ export const Auth = ({ isLogin }: Props) => {
                   </Text>
                 </Text>
               )}
+
+              <Divider my={3} />
+              <Center>
+                <GoogleButton onClick={handleGoogleSignIn} />
+              </Center>
               <Center>
                 {error !== "" && <Text color="red">{error}</Text>}
               </Center>

@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import {
   ReactNode,
@@ -15,6 +17,7 @@ import {
 } from "react";
 import { auth, db } from "../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   uid?: string | null;
@@ -32,6 +35,7 @@ interface AuthContextValue {
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signOut: () => Promise<void>;
   authStateRestored: boolean;
+  googleSignIn: () => Promise<void>;
 }
 
 interface Props {
@@ -42,6 +46,7 @@ const UserAuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 export const UserAuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [authStateRestored, setAuthStateRestored] = useState(false);
+  const navigate = useNavigate();
 
   const signUp = async (
     userEmail: string,
@@ -73,6 +78,16 @@ export const UserAuthContextProvider = ({ children }: Props) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      navigate("/useraccount");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser({
@@ -98,6 +113,7 @@ export const UserAuthContextProvider = ({ children }: Props) => {
     signIn,
     signOut: signOutUser,
     authStateRestored,
+    googleSignIn,
   };
 
   return (
