@@ -8,7 +8,7 @@ interface Props {
 
 export const NavBar = ({ children }: Props) => {
   return (
-    <Flex padding={6} alignItems="center">
+    <Flex padding={3} alignItems="center">
       <HStack>
         <GiTakeMyMoney color="#2cb67d" size="60px" />
         <Heading>Xpense Tracker</Heading>
