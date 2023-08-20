@@ -1,6 +1,5 @@
 import {
   Button,
-  Center,
   HStack,
   Heading,
   Modal,
@@ -14,7 +13,6 @@ import {
   StatHelpText,
   StatLabel,
   StatNumber,
-  Text,
 } from "@chakra-ui/react";
 import { useBudgetProgress } from "../../context/BudgetPeriodContext";
 import { useBudget } from "../../context/UserBudgetContext";

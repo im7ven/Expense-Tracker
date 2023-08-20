@@ -4,21 +4,20 @@ import {
   Button,
   Center,
   Container,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
   SimpleGrid,
   Text,
-  Image,
-  Flex,
 } from "@chakra-ui/react";
-import primaryBackground from "../images/FormBg.webp";
 import { FirebaseError } from "firebase/app";
 import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { useUserAuth } from "../context/UserAuthContext";
+import primaryBackground from "../images/FormBg.webp";
 
 interface Props {
   isLogin: boolean;

@@ -7,13 +7,7 @@ import {
   List,
   ListItem,
   Spacer,
-  Table,
-  Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
-  Tr,
 } from "@chakra-ui/react";
 import { useExpense } from "../../context/ExpenseContext";
 

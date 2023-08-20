@@ -11,10 +11,6 @@ export const BudgetExpenseProgress = () => {
   const { budgetExpenseTotal, expenseProgress } = useBudgetProgress();
   const { progressColor } = useBudgetFeedback();
 
-  // console.log("Date Progress ", budgetDateProgress);
-  // console.log("Ex Progress", expenseProgress);
-  // console.log("color:", progressColor);
-
   return (
     <CircularProgress
       size="250px"

@@ -1,23 +1,19 @@
 import {
   Box,
   Center,
-  CircularProgress,
-  CircularProgressLabel,
-  Divider,
   Flex,
   Progress,
-  Stack,
   Stat,
   StatLabel,
   StatNumber,
   Text,
 } from "@chakra-ui/react";
-import { useBudget } from "../../context/UserBudgetContext";
-import { useBudgetProgress } from "../../context/BudgetPeriodContext";
-import { BudgetExpenseProgress } from "./BudgetExpenseProgress";
-import { SuggestionAlert } from "./SuggestionAlert";
 import { useBudgetFeedback } from "../../context/BudgetFeedbackContext";
+import { useBudgetProgress } from "../../context/BudgetPeriodContext";
+import { useBudget } from "../../context/UserBudgetContext";
+import { BudgetExpenseProgress } from "./BudgetExpenseProgress";
 import { BudgetRemoveModal } from "./BudgetRemoveModal";
+import { SuggestionAlert } from "./SuggestionAlert";
 
 export const BudgetPlan = () => {
   const { budget } = useBudget();

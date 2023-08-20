@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  GridItem,
   HStack,
   Heading,
   SimpleGrid,
@@ -13,8 +12,8 @@ import {
   StatNumber,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { GiExpense } from "react-icons/gi";
 import { useState } from "react";
+import { GiExpense } from "react-icons/gi";
 import { ExpenseFilter } from "../components/Expense/ExpenseFilter";
 import { ExpenseForm } from "../components/Expense/ExpenseForm";
 import { ExpenseList } from "../components/Expense/ExpenseList";

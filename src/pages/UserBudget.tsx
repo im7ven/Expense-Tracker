@@ -35,7 +35,7 @@ export const UserBudget = () => {
   }, [budgetExpenses]);
 
   return (
-    <>
+    <Box py={5}>
       <BudgetEndModal isOpen={isBudgetEnded} onClose={handleBudgetEnd} />
       {budget && budget.length > 0 ? (
         <>
@@ -58,6 +58,6 @@ export const UserBudget = () => {
       ) : (
         <BudgetForm />
       )}
-    </>
+    </Box>
   );
 };

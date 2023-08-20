@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Heading, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import { useBudget } from "../../context/UserBudgetContext";
 import { BudgetRemoveModal } from "./BudgetRemoveModal";
 

@@ -43,7 +43,6 @@ export const UserAuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [authStateRestored, setAuthStateRestored] = useState(false);
 
-  // Sign up function
   const signUp = async (
     userEmail: string,
     userPassword: string,
@@ -70,12 +69,10 @@ export const UserAuthContextProvider = ({ children }: Props) => {
     return userCredentials;
   };
 
-  // Login function
   const signIn = (email: string, password: string) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Find the current user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser({

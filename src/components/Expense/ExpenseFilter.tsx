@@ -1,5 +1,5 @@
 import { Box, Select } from "@chakra-ui/react";
-import { Expense, useExpense } from "../../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 
 export const ExpenseFilter = () => {
   const { expenses, handleSelectedCategory, selectedCategory } = useExpense();
