@@ -26,6 +26,7 @@ export const BudgetForm = () => {
 
   const { addBudget } = useBudget();
   const startDate = watch("startDate");
+  const endDate = watch("endDate");
 
   const onSubmit = (data: BudgetFormInput) => {
     try {
@@ -38,6 +39,9 @@ export const BudgetForm = () => {
   const validateEndDate = (value: string) => {
     if (value && startDate && new Date(value) <= new Date(startDate)) {
       return "End date must be after the start date";
+    }
+    if (value && new Date(endDate) < new Date()) {
+      return "End date must be after the current date";
     }
     return true;
   };
