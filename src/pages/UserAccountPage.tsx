@@ -2,6 +2,9 @@ import {
   Box,
   Button,
   Flex,
+  GridItem,
+  HStack,
+  Heading,
   SimpleGrid,
   Spacer,
   Stack,
@@ -10,6 +13,7 @@ import {
   StatNumber,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { GiExpense } from "react-icons/gi";
 import { useState } from "react";
 import { ExpenseFilter } from "../components/Expense/ExpenseFilter";
 import { ExpenseForm } from "../components/Expense/ExpenseForm";
@@ -65,7 +69,18 @@ export const UserAccountPage = () => {
         )}
       </Box>
 
-      <ExpensePieChart />
+      {expenses?.length === 0 ? (
+        <Box alignSelf="center">
+          <HStack justify="center">
+            <Box alignSelf="start">
+              <GiExpense size="50px" color="#2cb67d" />
+            </Box>
+            <Heading>Create An Expense to get Started</Heading>
+          </HStack>
+        </Box>
+      ) : (
+        <ExpensePieChart />
+      )}
     </SimpleGrid>
   );
 };
