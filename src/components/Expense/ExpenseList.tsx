@@ -30,7 +30,6 @@ export const ExpenseList = () => {
                 <Heading color="brand.text" size="xs" key={item}>
                   {item}
                 </Heading>
-                {/* <Spacer /> */}
               </>
             ))}
           </Flex>

@@ -11,7 +11,6 @@ export const BudgetTable = () => {
     return budgetStartDate && expense.date >= budgetStartDate;
   });
 
-  console.log(budgetExpense);
   return (
     <>
       <Heading mb={3} size="md">

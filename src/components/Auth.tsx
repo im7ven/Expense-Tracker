@@ -11,12 +11,11 @@ import {
   Heading,
   Input,
   SimpleGrid,
-  Spacer,
   Text,
 } from "@chakra-ui/react";
 import { FirebaseError } from "firebase/app";
-import GoogleButton from "react-google-button";
 import { FormEvent, useState } from "react";
+import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 import primaryBackground from "../images/FormBg.webp";
