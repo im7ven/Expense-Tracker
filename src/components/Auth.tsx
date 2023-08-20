@@ -11,6 +11,7 @@ import {
   Heading,
   Input,
   SimpleGrid,
+  Spacer,
   Text,
 } from "@chakra-ui/react";
 import { FirebaseError } from "firebase/app";
@@ -71,16 +72,22 @@ export const Auth = ({ isLogin }: Props) => {
         columns={{ base: 1, md: 2 }}
       >
         <Flex
-          height={{ base: "80px", md: "initial" }}
+          height={{ base: "200px", md: "initial" }}
           bgPosition="center"
-          justify="center"
+          justify={{ base: "center", md: "start" }}
           bgSize="cover"
           bgImage={primaryBackground}
-          alignItems="center"
         >
-          <Heading color="#355" alignSelf="center" textAlign="center" size="lg">
-            Money Management Made Easier
-          </Heading>
+          <Flex
+            alignSelf="center"
+            justify="center"
+            flexDirection={{ base: "column", md: "column" }}
+          >
+            <Heading>Money</Heading>
+            <Heading>Management</Heading>
+            <Heading>Made</Heading>
+            <Heading>Easier</Heading>
+          </Flex>
         </Flex>
         <Container borderRadius={10} px={0} pt={8}>
           <Badge
