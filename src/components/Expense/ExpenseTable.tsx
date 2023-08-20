@@ -26,7 +26,7 @@ export const ExpenseTable = () => {
 
   if (expenses?.length !== 0)
     return (
-      <Table>
+      <Table bg="brand.secondaryBg" borderTopRadius="10px">
         <Thead>
           <Tr>
             <Th>Expense</Th>
