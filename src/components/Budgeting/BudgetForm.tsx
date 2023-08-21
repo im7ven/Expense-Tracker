@@ -40,8 +40,9 @@ export const BudgetForm = () => {
     if (value && startDate && new Date(value) <= new Date(startDate)) {
       return "End date must be after the start date";
     }
-    if (value && new Date(endDate) < new Date()) {
-      return "End date must be after the current date";
+    if (value && new Date(value) < new Date()) {
+      console.log(new Date(value));
+      return "End date must be at least one day after the current date";
     }
     return true;
   };
