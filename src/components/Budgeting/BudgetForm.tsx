@@ -26,7 +26,6 @@ export const BudgetForm = () => {
 
   const { addBudget } = useBudget();
   const startDate = watch("startDate");
-  const endDate = watch("endDate");
 
   const onSubmit = (data: BudgetFormInput) => {
     try {
