@@ -42,6 +42,8 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
     }
   };
 
+  const trimWhiteSpace = (value: string) => value.trim();
+
   return (
     <Box
       as={motion.div}
@@ -63,6 +65,7 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
             {...register("expenseName", {
               required: "Expense is required.",
               maxLength: { value: 16, message: "Maximum of 16 characters." },
+              validate: trimWhiteSpace,
             })}
             placeholder="Enter an expense"
           />
