@@ -42,8 +42,6 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
     }
   };
 
-  const trimWhiteSpace = (value: string) => value.trim();
-
   return (
     <Box
       as={motion.div}
@@ -65,7 +63,17 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
             {...register("expenseName", {
               required: "Expense is required.",
               maxLength: { value: 16, message: "Maximum of 16 characters." },
-              validate: trimWhiteSpace,
+              validate: {
+                trimWhiteSpace: (value) => {
+                  const trimmedValue = value.trim();
+
+                  if (!trimmedValue) {
+                    return "Expense cannot be empty.";
+                  }
+
+                  return undefined; // Indicates a valid input
+                },
+              },
             })}
             placeholder="Enter an expense"
           />
@@ -79,8 +87,8 @@ export const ExpenseForm = ({ onCloseForm }: Props) => {
             })}
             placeholder="Select a category"
           >
-            {categories.map((category) => (
-              <option key={category} value={category}>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
                 {category}
               </option>
             ))}
