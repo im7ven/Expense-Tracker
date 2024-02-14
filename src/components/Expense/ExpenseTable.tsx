@@ -37,8 +37,8 @@ export const ExpenseTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {filteredExpenses?.map((expense) => (
-            <Tr key={expense.id}>
+          {filteredExpenses?.map((expense, index) => (
+            <Tr key={index}>
               <Td>{expense.expenseName}</Td>
               <Td>{expense.category}</Td>
               <Td>{expense.amount}</Td>
